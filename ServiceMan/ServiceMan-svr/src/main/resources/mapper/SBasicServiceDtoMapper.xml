@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cast.serviceman.server.mapper.SBasicServiceDtoMapper">
+    <resultMap id="BaseResultMap" type="com.cast.serviceman.api.entity.SBasicServiceDto">
+        <id column="BASIC_SERVICE_ID" property="basicServiceId" jdbcType="VARCHAR"/>
+        <result column="DICTIONARIES_TABLE_ID" property="dictionariesTableId" jdbcType="VARCHAR"/>
+        <result column="BASIC_SERVICE_NAME" property="basicServiceName" jdbcType="VARCHAR"/>
+        <result column="VIRTUAL_MACHINE_ID" property="virtualMachineId" jdbcType="VARCHAR"/>
+        <result column="BASIC_SERVICE_ACCOUNT" property="basicServiceAccount" jdbcType="VARCHAR"/>
+        <result column="BASIC_SERVICE_PASSWORD" property="basicServicePassword" jdbcType="VARCHAR"/>
+        <result column="BASIC_SERVICE_PID" property="basicServicePid" jdbcType="VARCHAR"/>
+        <result column="BASIC_SERVICE_IP" property="basicServiceIp" jdbcType="VARCHAR"/>
+        <result column="BASIC_SERVICE_STATUS" property="basicServiceStatus" jdbcType="VARCHAR"/>
+        <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="LAST_MODIFY_USER" property="lastModifyUser" jdbcType="VARCHAR"/>
+        <result column="LAST_MODIFY_TIME" property="lastModifyTime" jdbcType="TIMESTAMP"/>
+        <result column="CPU_COND" property="cpuCond" jdbcType="VARCHAR"/>
+        <result column="CPU_KEY" property="cpuKey" jdbcType="VARCHAR"/>
+        <result column="MEMORY_COND" property="memoryCond" jdbcType="VARCHAR"/>
+        <result column="MEMORY_KEY" property="memoryKey" jdbcType="VARCHAR"/>
+        <result column="DISK_COND" property="diskCond" jdbcType="VARCHAR"/>
+        <result column="DISK_KEY" property="diskKey" jdbcType="VARCHAR"/>
+        <result column="RUNNING_COND" property="runningCond" jdbcType="VARCHAR"/>
+        <result column="RUNNING_KEY" property="runningKey" jdbcType="VARCHAR"/>
+        <result column="LOG_COND" property="logCond" jdbcType="VARCHAR"/>
+        <result column="LOG_KEY" property="logKey" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    BASIC_SERVICE_ID, DICTIONARIES_TABLE_ID, BASIC_SERVICE_NAME, VIRTUAL_MACHINE_ID, 
+    BASIC_SERVICE_ACCOUNT, BASIC_SERVICE_PASSWORD, BASIC_SERVICE_PID, BASIC_SERVICE_IP, 
+    BASIC_SERVICE_STATUS, CREATE_USER, CREATE_TIME, LAST_MODIFY_USER, LAST_MODIFY_TIME,
+    CPU_COND, CPU_KEY, MEMORY_COND, MEMORY_KEY, DISK_COND, DISK_KEY, RUNNING_COND, RUNNING_KEY,
+    LOG_COND, LOG_KEY
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from t_basic_service
+        where BASIC_SERVICE_ID = #{basicServiceId,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_basic_service
+    where BASIC_SERVICE_ID = #{basicServiceId,jdbcType=VARCHAR}
+  </delete>
+
+    <insert id="insert" parameterType="com.cast.serviceman.api.entity.SBasicServiceDto">
+    insert into t_basic_service (BASIC_SERVICE_ID, DICTIONARIES_TABLE_ID, 
+      BASIC_SERVICE_NAME, VIRTUAL_MACHINE_ID, BASIC_SERVICE_ACCOUNT, 
+      BASIC_SERVICE_PASSWORD, BASIC_SERVICE_PID, 
+      BASIC_SERVICE_IP, BASIC_SERVICE_STATUS, CREATE_USER, 
+      CREATE_TIME, LAST_MODIFY_USER, LAST_MODIFY_TIME,
+      CPU_COND, CPU_KEY, MEMORY_COND, MEMORY_KEY, DISK_COND, DISK_KEY, RUNNING_COND, RUNNING_KEY,
+      LOG_COND, LOG_KEY
+      )
+    values (#{basicServiceId,jdbcType=VARCHAR}, #{dictionariesTableId,jdbcType=VARCHAR}, 
+      #{basicServiceName,jdbcType=VARCHAR}, #{virtualMachineId,jdbcType=VARCHAR}, #{basicServiceAccount,jdbcType=VARCHAR}, 
+      #{basicServicePassword,jdbcType=VARCHAR}, #{basicServicePid,jdbcType=VARCHAR}, 
+      #{basicServiceIp,jdbcType=VARCHAR}, #{basicServiceStatus,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, 
+      NOW(), #{lastModifyUser,jdbcType=VARCHAR}, NOW(),
+       #{cpuCond,jdbcType=VARCHAR}, #{cpuKey,jdbcType=VARCHAR}, #{memoryCond,jdbcType=VARCHAR},
+      #{memoryKey,jdbcType=VARCHAR}, #{diskCond,jdbcType=VARCHAR}, #{diskKey,jdbcType=VARCHAR},
+      #{runningCond,jdbcType=VARCHAR}, #{runningKey,jdbcType=VARCHAR}, #{logCond,jdbcType=VARCHAR},
+      #{logKey,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.cast.serviceman.api.entity.SBasicServiceDto">
+        insert into t_basic_service
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="basicServiceId != null">
+                BASIC_SERVICE_ID,
+            </if>
+            <if test="dictionariesTableId != null">
+                DICTIONARIES_TABLE_ID,
+            </if>
+            <if test="basicServiceName != null">
+                BASIC_SERVICE_NAME,
+            </if>
+            <if test="virtualMachineId != null">
+                VIRTUAL_MACHINE_ID,
+            </if>
+            <if test="basicServiceAccount != null">
+                BASIC_SERVICE_ACCOUNT,
+            </if>
+            <if test="basicServicePassword != null">
+                BASIC_SERVICE_PASSWORD,
+            </if>
+            <if test="basicServicePid != null">
+                BASIC_SERVICE_PID,
+            </if>
+            <if test="basicServiceIp != null">
+                BASIC_SERVICE_IP,
+            </if>
+            <if test="basicServiceStatus != null">
+                BASIC_SERVICE_STATUS,
+            </if>
+            <if test="createUser != null">
+                CREATE_USER,
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME,
+            </if>
+            <if test="lastModifyUser != null">
+                LAST_MODIFY_USER,
+            </if>
+            <if test="lastModifyTime != null">
+                LAST_MODIFY_TIME,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="basicServiceId != null">
+                #{basicServiceId,jdbcType=VARCHAR},
+            </if>
+            <if test="dictionariesTableId != null">
+                #{dictionariesTableId,jdbcType=VARCHAR},
+            </if>
+            <if test="basicServiceName != null">
+                #{basicServiceName,jdbcType=VARCHAR},
+            </if>
+            <if test="virtualMachineId != null">
+                #{virtualMachineId,jdbcType=VARCHAR},
+            </if>
+            <if test="basicServiceAccount != null">
+                #{basicServiceAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="basicServicePassword != null">
+                #{basicServicePassword,jdbcType=VARCHAR},
+            </if>
+            <if test="basicServicePid != null">
+                #{basicServicePid,jdbcType=VARCHAR},
+            </if>
+            <if test="basicServiceIp != null">
+                #{basicServiceIp,jdbcType=VARCHAR},
+            </if>
+            <if test="basicServiceStatus != null">
+                #{basicServiceStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="createUser != null">
+                #{createUser,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUser != null">
+                #{lastModifyUser,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyTime != null">
+                #{lastModifyTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.cast.serviceman.api.entity.SBasicServiceDto">
+        update t_basic_service
+        <set>
+            <if test="dictionariesTableId != null">
+                DICTIONARIES_TABLE_ID = #{dictionariesTableId,jdbcType=VARCHAR},
+            </if>
+            <if test="basicServiceName != null">
+                BASIC_SERVICE_NAME = #{basicServiceName,jdbcType=VARCHAR},
+            </if>
+            <if test="virtualMachineId != null">
+                VIRTUAL_MACHINE_ID = #{virtualMachineId,jdbcType=VARCHAR},
+            </if>
+            <if test="basicServiceAccount != null">
+                BASIC_SERVICE_ACCOUNT = #{basicServiceAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="basicServicePassword != null">
+                BASIC_SERVICE_PASSWORD = #{basicServicePassword,jdbcType=VARCHAR},
+            </if>
+            <if test="basicServicePid != null">
+                BASIC_SERVICE_PID = #{basicServicePid,jdbcType=VARCHAR},
+            </if>
+            <if test="basicServiceIp != null">
+                BASIC_SERVICE_IP = #{basicServiceIp,jdbcType=VARCHAR},
+            </if>
+            <if test="basicServiceStatus != null">
+                BASIC_SERVICE_STATUS = #{basicServiceStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="createUser != null">
+                CREATE_USER = #{createUser,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUser != null">
+                LAST_MODIFY_USER = #{lastModifyUser,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyTime != null">
+                LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where BASIC_SERVICE_ID = #{basicServiceId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.cast.serviceman.api.entity.SBasicServiceDto">
+    update t_basic_service
+    set DICTIONARIES_TABLE_ID = #{dictionariesTableId,jdbcType=VARCHAR},
+      BASIC_SERVICE_NAME = #{basicServiceName,jdbcType=VARCHAR},
+      VIRTUAL_MACHINE_ID = #{virtualMachineId,jdbcType=VARCHAR},
+      BASIC_SERVICE_ACCOUNT = #{basicServiceAccount,jdbcType=VARCHAR},
+      BASIC_SERVICE_PASSWORD = #{basicServicePassword,jdbcType=VARCHAR},
+      BASIC_SERVICE_PID = #{basicServicePid,jdbcType=VARCHAR},
+      BASIC_SERVICE_IP = #{basicServiceIp,jdbcType=VARCHAR},
+      BASIC_SERVICE_STATUS = #{basicServiceStatus,jdbcType=VARCHAR},
+      CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      LAST_MODIFY_USER = #{lastModifyUser,jdbcType=VARCHAR},
+      LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP},
+      CPU_COND = #{cpuCond,jdbcType=VARCHAR},
+      CPU_KEY = #{cpuKey,jdbcType=VARCHAR},
+      MEMORY_COND = #{memoryCond,jdbcType=VARCHAR},
+      MEMORY_KEY = #{memoryKey,jdbcType=VARCHAR},
+      DISK_COND = #{diskCond,jdbcType=VARCHAR},
+      DISK_KEY = #{diskKey,jdbcType=VARCHAR},
+      RUNNING_COND = #{runningCond,jdbcType=VARCHAR},
+      RUNNING_KEY = #{runningKey,jdbcType=VARCHAR},
+      LOG_COND = #{logCond,jdbcType=VARCHAR},
+      LOG_KEY = #{logKey,jdbcType=VARCHAR}
+    where BASIC_SERVICE_ID = #{basicServiceId,jdbcType=VARCHAR}
+  </update>
+</mapper>

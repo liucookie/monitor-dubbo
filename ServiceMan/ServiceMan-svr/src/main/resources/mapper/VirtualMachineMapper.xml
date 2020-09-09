@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cast.serviceman.server.mapper.VirtualMachineMapper" >
+  <resultMap id="BaseResultMap" type="com.cast.serviceman.api.entity.VirtualMachine" >
+    <id column="VIRTUAL_MACHINE_ID" property="virtualMachineId" jdbcType="VARCHAR" />
+    <result column="VIRTUALMACHINE_NAME" property="virtualmachineName" jdbcType="VARCHAR" />
+    <result column="GROUP_ID" property="groupId" jdbcType="VARCHAR" />
+    <result column="DICTIONARIES_ID" property="dictionariesId" jdbcType="VARCHAR" />
+    <result column="VIRTUAL_MACHINE_IP" property="virtualMachineIp" jdbcType="VARCHAR" />
+    <result column="VIRTUAL_MACHINE_ACCOUNT" property="virtualMachineAccount" jdbcType="VARCHAR" />
+    <result column="VIRTUAL_MACHINE_PASSWORD" property="virtualMachinePassword" jdbcType="VARCHAR" />
+    <result column="VIRTUAL_MACHINE_OPERATING_STATE" property="virtualMachineOperatingState" jdbcType="VARCHAR" />
+    <result column="SERVICE_LIVING_NAME" property="serviceLivingName" jdbcType="VARCHAR" />
+    <result column="VIRTUALMACHINE_DEPLOY_STATE" property="virtualmachineDeployState" jdbcType="VARCHAR" />
+    <result column="VIRTUAL_MACHINE_RUNNING_TIME" property="virtualMachineRunningTime" jdbcType="TIMESTAMP" />
+    <result column="VIRTUAL_MACHINE_MEMORY" property="virtualMachineMemory" jdbcType="VARCHAR" />
+    <result column="VIRTUAL_MACHINE_STORAGE" property="virtualMachineStorage" jdbcType="VARCHAR" />
+    <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="LAST_MODIFY_USER" property="lastModifyUser" jdbcType="VARCHAR" />
+    <result column="LAST_MODIFY_TIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    VIRTUAL_MACHINE_ID, VIRTUALMACHINE_NAME, GROUP_ID, DICTIONARIES_ID, VIRTUAL_MACHINE_IP, 
+    VIRTUAL_MACHINE_ACCOUNT, VIRTUAL_MACHINE_PASSWORD, VIRTUAL_MACHINE_OPERATING_STATE, 
+    SERVICE_LIVING_NAME, VIRTUALMACHINE_DEPLOY_STATE, VIRTUAL_MACHINE_RUNNING_TIME, VIRTUAL_MACHINE_MEMORY, 
+    VIRTUAL_MACHINE_STORAGE, CREATE_USER, CREATE_TIME, LAST_MODIFY_USER, LAST_MODIFY_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_virtual_machine
+    where VIRTUAL_MACHINE_ID = #{virtualMachineId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="queryVirtualByGId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from t_virtual_machine
+    where GROUP_ID = #{groupId}
+  </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_virtual_machine
+    where VIRTUAL_MACHINE_ID = #{virtualMachineId}
+  </delete>
+
+
+  <insert id="insert" parameterType="com.cast.serviceman.api.entity.VirtualMachine" >
+    insert into t_virtual_machine (VIRTUAL_MACHINE_ID, VIRTUALMACHINE_NAME, 
+      GROUP_ID, DICTIONARIES_ID, VIRTUAL_MACHINE_IP, 
+      VIRTUAL_MACHINE_ACCOUNT, VIRTUAL_MACHINE_PASSWORD, 
+      VIRTUAL_MACHINE_OPERATING_STATE, SERVICE_LIVING_NAME, 
+      VIRTUALMACHINE_DEPLOY_STATE, VIRTUAL_MACHINE_RUNNING_TIME, 
+      VIRTUAL_MACHINE_MEMORY, VIRTUAL_MACHINE_STORAGE, 
+      CREATE_USER, CREATE_TIME, LAST_MODIFY_USER, 
+      LAST_MODIFY_TIME)
+    values (#{virtualMachineId,jdbcType=VARCHAR}, #{virtualmachineName,jdbcType=VARCHAR}, 
+      #{groupId,jdbcType=VARCHAR}, #{dictionariesId,jdbcType=VARCHAR}, #{virtualMachineIp,jdbcType=VARCHAR}, 
+      #{virtualMachineAccount,jdbcType=VARCHAR}, #{virtualMachinePassword,jdbcType=VARCHAR}, 
+      #{virtualMachineOperatingState,jdbcType=VARCHAR}, #{serviceLivingName,jdbcType=VARCHAR}, 
+      #{virtualmachineDeployState,jdbcType=VARCHAR}, #{virtualMachineRunningTime,jdbcType=TIMESTAMP}, 
+      #{virtualMachineMemory,jdbcType=VARCHAR}, #{virtualMachineStorage,jdbcType=VARCHAR}, 
+      #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastModifyUser,jdbcType=VARCHAR}, 
+      #{lastModifyTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cast.serviceman.api.entity.VirtualMachine" >
+    insert into t_virtual_machine
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="virtualMachineId != null" >
+        VIRTUAL_MACHINE_ID,
+      </if>
+      <if test="virtualmachineName != null" >
+        VIRTUALMACHINE_NAME,
+      </if>
+      <if test="groupId != null" >
+        GROUP_ID,
+      </if>
+      <if test="dictionariesId != null" >
+        DICTIONARIES_ID,
+      </if>
+      <if test="virtualMachineIp != null" >
+        VIRTUAL_MACHINE_IP,
+      </if>
+      <if test="virtualMachineAccount != null" >
+        VIRTUAL_MACHINE_ACCOUNT,
+      </if>
+      <if test="virtualMachinePassword != null" >
+        VIRTUAL_MACHINE_PASSWORD,
+      </if>
+      <if test="virtualMachineOperatingState != null" >
+        VIRTUAL_MACHINE_OPERATING_STATE,
+      </if>
+      <if test="serviceLivingName != null" >
+        SERVICE_LIVING_NAME,
+      </if>
+      <if test="virtualmachineDeployState != null" >
+        VIRTUALMACHINE_DEPLOY_STATE,
+      </if>
+      <if test="virtualMachineRunningTime != null" >
+        VIRTUAL_MACHINE_RUNNING_TIME,
+      </if>
+      <if test="virtualMachineMemory != null" >
+        VIRTUAL_MACHINE_MEMORY,
+      </if>
+      <if test="virtualMachineStorage != null" >
+        VIRTUAL_MACHINE_STORAGE,
+      </if>
+      <if test="createUser != null" >
+        CREATE_USER,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="lastModifyUser != null" >
+        LAST_MODIFY_USER,
+      </if>
+      <if test="lastModifyTime != null" >
+        LAST_MODIFY_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="virtualMachineId != null" >
+        #{virtualMachineId,jdbcType=VARCHAR},
+      </if>
+      <if test="virtualmachineName != null" >
+        #{virtualmachineName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null" >
+        #{groupId,jdbcType=VARCHAR},
+      </if>
+      <if test="dictionariesId != null" >
+        #{dictionariesId,jdbcType=VARCHAR},
+      </if>
+      <if test="virtualMachineIp != null" >
+        #{virtualMachineIp,jdbcType=VARCHAR},
+      </if>
+      <if test="virtualMachineAccount != null" >
+        #{virtualMachineAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="virtualMachinePassword != null" >
+        #{virtualMachinePassword,jdbcType=VARCHAR},
+      </if>
+      <if test="virtualMachineOperatingState != null" >
+        #{virtualMachineOperatingState,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceLivingName != null" >
+        #{serviceLivingName,jdbcType=VARCHAR},
+      </if>
+      <if test="virtualmachineDeployState != null" >
+        #{virtualmachineDeployState,jdbcType=VARCHAR},
+      </if>
+      <if test="virtualMachineRunningTime != null" >
+        #{virtualMachineRunningTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="virtualMachineMemory != null" >
+        #{virtualMachineMemory,jdbcType=VARCHAR},
+      </if>
+      <if test="virtualMachineStorage != null" >
+        #{virtualMachineStorage,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyUser != null" >
+        #{lastModifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyTime != null" >
+        #{lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cast.serviceman.api.entity.VirtualMachine" >
+    update t_virtual_machine
+    <set >
+      <if test="virtualmachineName != null" >
+        VIRTUALMACHINE_NAME = #{virtualmachineName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null" >
+        GROUP_ID = #{groupId,jdbcType=VARCHAR},
+      </if>
+      <if test="dictionariesId != null" >
+        DICTIONARIES_ID = #{dictionariesId,jdbcType=VARCHAR},
+      </if>
+      <if test="virtualMachineIp != null" >
+        VIRTUAL_MACHINE_IP = #{virtualMachineIp,jdbcType=VARCHAR},
+      </if>
+      <if test="virtualMachineAccount != null" >
+        VIRTUAL_MACHINE_ACCOUNT = #{virtualMachineAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="virtualMachinePassword != null" >
+        VIRTUAL_MACHINE_PASSWORD = #{virtualMachinePassword,jdbcType=VARCHAR},
+      </if>
+      <if test="virtualMachineOperatingState != null" >
+        VIRTUAL_MACHINE_OPERATING_STATE = #{virtualMachineOperatingState,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceLivingName != null" >
+        SERVICE_LIVING_NAME = #{serviceLivingName,jdbcType=VARCHAR},
+      </if>
+      <if test="virtualmachineDeployState != null" >
+        VIRTUALMACHINE_DEPLOY_STATE = #{virtualmachineDeployState,jdbcType=VARCHAR},
+      </if>
+      <if test="virtualMachineRunningTime != null" >
+        VIRTUAL_MACHINE_RUNNING_TIME = #{virtualMachineRunningTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="virtualMachineMemory != null" >
+        VIRTUAL_MACHINE_MEMORY = #{virtualMachineMemory,jdbcType=VARCHAR},
+      </if>
+      <if test="virtualMachineStorage != null" >
+        VIRTUAL_MACHINE_STORAGE = #{virtualMachineStorage,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyUser != null" >
+        LAST_MODIFY_USER = #{lastModifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyTime != null" >
+        LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where VIRTUAL_MACHINE_ID = #{virtualMachineId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cast.serviceman.api.entity.VirtualMachine" >
+    update t_virtual_machine
+    set VIRTUALMACHINE_NAME = #{virtualmachineName,jdbcType=VARCHAR},
+      GROUP_ID = #{groupId,jdbcType=VARCHAR},
+      DICTIONARIES_ID = #{dictionariesId,jdbcType=VARCHAR},
+      VIRTUAL_MACHINE_IP = #{virtualMachineIp,jdbcType=VARCHAR},
+      VIRTUAL_MACHINE_ACCOUNT = #{virtualMachineAccount,jdbcType=VARCHAR},
+      VIRTUAL_MACHINE_PASSWORD = #{virtualMachinePassword,jdbcType=VARCHAR},
+      VIRTUAL_MACHINE_OPERATING_STATE = #{virtualMachineOperatingState,jdbcType=VARCHAR},
+      SERVICE_LIVING_NAME = #{serviceLivingName,jdbcType=VARCHAR},
+      VIRTUALMACHINE_DEPLOY_STATE = #{virtualmachineDeployState,jdbcType=VARCHAR},
+      VIRTUAL_MACHINE_RUNNING_TIME = #{virtualMachineRunningTime,jdbcType=TIMESTAMP},
+      VIRTUAL_MACHINE_MEMORY = #{virtualMachineMemory,jdbcType=VARCHAR},
+      VIRTUAL_MACHINE_STORAGE = #{virtualMachineStorage,jdbcType=VARCHAR},
+      CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      LAST_MODIFY_USER = #{lastModifyUser,jdbcType=VARCHAR},
+      LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP}
+    where VIRTUAL_MACHINE_ID = #{virtualMachineId,jdbcType=VARCHAR}
+  </update>
+</mapper>

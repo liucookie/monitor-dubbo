@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.cast.serviceman</groupId>
+    <artifactId>ServiceMan</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>ServiceMan</name>
+
+    <modules>
+        <module>ServiceMan-api</module>
+        <module>ServiceMan-svr</module>
+        <module>ServiceMan-cli</module>
+    </modules>
+    <!--  所有引入包的版本信息都需要在这里新增，方便统一管理-->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <dubbo.version>2.7.3</dubbo.version>
+        <dubbo.zk.version>2.7.7</dubbo.zk.version>
+        <fastjson.version>1.2.71</fastjson.version>
+        <jdbc.version>5.1.38</jdbc.version>
+        <spring.version>4.3.16.RELEASE</spring.version>
+        <spring.boot.version>2.2.1.RELEASE</spring.boot.version>
+        <kryo.version>0.42</kryo.version>
+        <mysql-connector.version>5.1.28</mysql-connector.version>
+        <mybatis-spring.version>1.3.2</mybatis-spring.version>
+        <mybatis.version>3.4.4</mybatis.version>
+        <mybatis-spring-boot-starter.version>1.1.1</mybatis-spring-boot-starter.version>
+        <pagehelper-spring-boot-starter.version>1.2.12</pagehelper-spring-boot-starter.version>
+        <org.aspectj>1.8.9</org.aspectj>
+        <mybatis-springboot-version>1.3.2</mybatis-springboot-version>
+        <slf4j-api-version>1.7.5</slf4j-api-version>
+
+        <!--<spring-data-cassandra-version>3.0.3.RELEASE</spring-data-cassandra-version>-->
+        <!--<cassandra-driver-core-version>3.4.0</cassandra-driver-core-version>-->
+        <!--<cassandra-driver-mapping-version>3.4.0</cassandra-driver-mapping-version>-->
+
+
+    </properties>
+</project>
