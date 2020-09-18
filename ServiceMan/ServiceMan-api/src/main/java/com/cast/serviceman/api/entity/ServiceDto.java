@@ -228,4 +228,32 @@ public class ServiceDto implements Serializable {
     public void setLogKey(String logKey) {
         this.logKey = logKey == null ? null : logKey.trim();
     }
+
+    @Override
+    public String toString() {
+        return "ServiceDto{" +
+                "serviceId='" + serviceId + '\'' +
+                ", dictionariesTableId='" + dictionariesTableId + '\'' +
+                ", groupId='" + groupId + '\'' +
+                ", serviceName='" + serviceName + '\'' +
+                ", serviceIp='" + serviceIp + '\'' +
+                ", serviceAccount='" + serviceAccount + '\'' +
+                ", servicePassword='" + servicePassword + '\'' +
+                ", createUser='" + createUser + '\'' +
+                ", createTime=" + createTime +
+                ", lastModifyUser='" + lastModifyUser + '\'' +
+                ", lastModifyTime=" + lastModifyTime +
+                ", virtualId='" + virtualId + '\'' +
+                ", cpuCond='" + cpuCond + '\'' +
+                ", cpuKey='" + cpuKey + '\'' +
+                ", memoryCond='" + memoryCond + '\'' +
+                ", memoryKey='" + memoryKey + '\'' +
+                ", diskCond='" + diskCond + '\'' +
+                ", diskKey='" + diskKey + '\'' +
+                ", runningCond='" + runningCond + '\'' +
+                ", runningKey='" + runningKey + '\'' +
+                ", logCond='" + logCond + '\'' +
+                ", logKey='" + logKey + '\'' +
+                '}';
+    }
 }

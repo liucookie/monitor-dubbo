@@ -18,7 +18,7 @@
     <!--  所有引入包的版本信息都需要在这里新增，方便统一管理-->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <dubbo.version>2.7.3</dubbo.version>
+        <dubbo.version>2.7.7</dubbo.version>
         <dubbo.zk.version>2.7.7</dubbo.zk.version>
         <fastjson.version>1.2.71</fastjson.version>
         <jdbc.version>5.1.38</jdbc.version>
@@ -37,6 +37,9 @@
         <!--<spring-data-cassandra-version>3.0.3.RELEASE</spring-data-cassandra-version>-->
         <!--<cassandra-driver-core-version>3.4.0</cassandra-driver-core-version>-->
         <!--<cassandra-driver-mapping-version>3.4.0</cassandra-driver-mapping-version>-->
+
+        <commons-configuration2-version>2.2</commons-configuration2-version>
+        <commons-beanutils-version>1.9.3</commons-beanutils-version>
 
 
     </properties>

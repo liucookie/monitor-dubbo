@@ -33,11 +33,7 @@
     <!--version：1.0.0，随着软件版本迭代更新   -->
     <!-- executes 控制服务器端并发执行（或占用线程池线程数）数量，executes= 7，如果业务量大可以酌情修改-->
 
-    <dubbo:service interface="com.cast.serviceman.api.service.ServiceAsync" ref="sai" group="serviceman1.0"
-                   version="1.0.0" registry="Beijing"/>
-    <!-- 和本地bean一样实现服务 -->
-    <bean id="sai" class="com.cast.serviceman.server.service.ServiceAsyncImpl"/>
-
+    
 
     <!--测试类-->
     <!--<dubbo:service interface="com.cast.serviceman.api.service.UserService" ref="user" group="serviceman1.0"-->

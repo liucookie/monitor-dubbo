@@ -21,6 +21,13 @@
     where GROUP_ID = #{groupId,jdbcType=VARCHAR}
   </select>
 
+  <select id="selectByName" resultType="java.lang.String" parameterType="java.lang.String" >
+    select
+     GROUP_ID
+    from t_group
+    where GROUP_NAME = #{name}
+  </select>
+
   <select id="queryAllGroup" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select
     <include refid="Base_Column_List" />

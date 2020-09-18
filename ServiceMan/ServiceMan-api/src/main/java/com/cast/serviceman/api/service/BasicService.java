@@ -6,17 +6,21 @@ import com.cast.serviceman.api.entity.common.ResponseModel;
 
 import java.util.List;
 
+/**
+ * 基础服务相关接口
+ */
 public interface BasicService {
 
-    void  add(SBasicServiceDto po);
+    ResponseModel<Integer>  add(SBasicServiceDto po);
 
-    void  update(SBasicServiceDto po);
+    ResponseModel<Integer>  update(SBasicServiceDto po);
 
-    ResponseModel<List<SBasicServiceDto>> queryAll();
+    // 根据分组id查询下属基础服务
+    ResponseModel<List<SBasicServiceDto>> queryByGroupId(String groupId);
 
     void delete(String id);
 
     void addGroup(TGroup dto);
 
-    ResponseModel<List<TGroup>> queryAllGroup();
+    ResponseModel<List<TGroup>> queryAllGroup(String pId);
 }

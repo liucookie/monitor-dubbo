@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cast.serviceman.server.mapper.SatInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.cast.serviceman.api.entity.SatInfo" >
+    <id column="SAT_KEY" property="satKey" jdbcType="INTEGER" />
+    <result column="SAT_ID" property="satId" jdbcType="VARCHAR" />
+    <result column="SAT_NAME" property="satName" jdbcType="VARCHAR" />
+    <result column="SAT_NO" property="satNo" jdbcType="VARCHAR" />
+    <result column="SAT_INTFLAG" property="satIntflag" jdbcType="INTEGER" />
+    <result column="radius" property="radius" jdbcType="INTEGER" />
+    <result column="min_time" property="minTime" jdbcType="BIGINT" />
+    <result column="has_delay" property="hasDelay" jdbcType="TINYINT" />
+    <result column="cmd_mode" property="cmdMode" jdbcType="TINYINT" />
+    <result column="rng_delay" property="rngDelay" jdbcType="REAL" />
+    <result column="is_sat" property="isSat" jdbcType="TINYINT" />
+    <result column="xwrapper" property="xwrapper" jdbcType="VARCHAR" />
+    <result column="range_zero" property="rangeZero" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    SAT_KEY, SAT_ID, SAT_NAME, SAT_NO, SAT_INTFLAG, radius, min_time, has_delay, cmd_mode, 
+    rng_delay, is_sat, xwrapper, range_zero
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from satelliteinfo
+    where SAT_KEY = #{satKey,jdbcType=INTEGER}
+  </select>
+
+  <select id="queryAll" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from satelliteinfo
+  </select>
+
+</mapper>

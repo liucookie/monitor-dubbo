@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cast.serviceman.server.mapper.DictionaryMapper" >
+  <resultMap id="BaseResultMap" type="com.cast.serviceman.api.entity.Dictionary" >
+
+    <id column="DICTIONARY_CODE" property="dictionaryCode" jdbcType="VARCHAR" />
+    <result column="DICTIONARY_NAME" property="dictionaryName" jdbcType="VARCHAR" />
+    <result column="DICTIONARY_TYPE_CODE" property="dictionaryTypeCode" jdbcType="VARCHAR" />
+    <result column="DICTIONARY_ORDER" property="dictionaryOrder" jdbcType="INTEGER" />
+    <result column="DICTIONARY_STATUS" property="dictionaryStatus" jdbcType="VARCHAR" />
+    <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+    <result column="LAST_MODIFY_USER" property="lastModifyUser" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="LAST_MODIFY_TIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.cast.serviceman.api.entity.Dictionary" extends="BaseResultMap" >
+
+    <result column="DICTIONARY_DESC" property="dictionaryDesc" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+
+    DICTIONARY_CODE, DICTIONARY_NAME, DICTIONARY_TYPE_CODE, DICTIONARY_ORDER, DICTIONARY_STATUS, 
+    CREATE_USER, LAST_MODIFY_USER, CREATE_TIME, LAST_MODIFY_TIME
+  </sql>
+  <sql id="Blob_Column_List" >
+
+    DICTIONARY_DESC
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_dictionary
+    where DICTIONARY_CODE = #{dictionaryCode,jdbcType=VARCHAR}
+  </select>
+
+  <select id="queryTypeCode" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_dictionary
+    where DICTIONARY_TYPE_CODE = #{dictionaryTypeCode,jdbcType=VARCHAR}
+  </select>
+
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+
+    delete from t_dictionary
+    where DICTIONARY_CODE = #{dictionaryCode,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.cast.serviceman.api.entity.Dictionary" >
+
+    insert into t_dictionary (DICTIONARY_CODE, DICTIONARY_NAME, DICTIONARY_TYPE_CODE, 
+      DICTIONARY_ORDER, DICTIONARY_STATUS, CREATE_USER, 
+      LAST_MODIFY_USER, CREATE_TIME, LAST_MODIFY_TIME, 
+      DICTIONARY_DESC)
+    values (#{dictionaryCode,jdbcType=VARCHAR}, #{dictionaryName,jdbcType=VARCHAR}, #{dictionaryTypeCode,jdbcType=VARCHAR}, 
+      #{dictionaryOrder,jdbcType=INTEGER}, #{dictionaryStatus,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, 
+      #{lastModifyUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastModifyTime,jdbcType=TIMESTAMP}, 
+      #{dictionaryDesc,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cast.serviceman.api.entity.Dictionary" >
+
+    insert into t_dictionary
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dictionaryCode != null" >
+        DICTIONARY_CODE,
+      </if>
+      <if test="dictionaryName != null" >
+        DICTIONARY_NAME,
+      </if>
+      <if test="dictionaryTypeCode != null" >
+        DICTIONARY_TYPE_CODE,
+      </if>
+      <if test="dictionaryOrder != null" >
+        DICTIONARY_ORDER,
+      </if>
+      <if test="dictionaryStatus != null" >
+        DICTIONARY_STATUS,
+      </if>
+      <if test="createUser != null" >
+        CREATE_USER,
+      </if>
+      <if test="lastModifyUser != null" >
+        LAST_MODIFY_USER,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="lastModifyTime != null" >
+        LAST_MODIFY_TIME,
+      </if>
+      <if test="dictionaryDesc != null" >
+        DICTIONARY_DESC,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dictionaryCode != null" >
+        #{dictionaryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dictionaryName != null" >
+        #{dictionaryName,jdbcType=VARCHAR},
+      </if>
+      <if test="dictionaryTypeCode != null" >
+        #{dictionaryTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dictionaryOrder != null" >
+        #{dictionaryOrder,jdbcType=INTEGER},
+      </if>
+      <if test="dictionaryStatus != null" >
+        #{dictionaryStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyUser != null" >
+        #{lastModifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyTime != null" >
+        #{lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dictionaryDesc != null" >
+        #{dictionaryDesc,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cast.serviceman.api.entity.Dictionary" >
+
+    update t_dictionary
+    <set >
+      <if test="dictionaryName != null" >
+        DICTIONARY_NAME = #{dictionaryName,jdbcType=VARCHAR},
+      </if>
+      <if test="dictionaryTypeCode != null" >
+        DICTIONARY_TYPE_CODE = #{dictionaryTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dictionaryOrder != null" >
+        DICTIONARY_ORDER = #{dictionaryOrder,jdbcType=INTEGER},
+      </if>
+      <if test="dictionaryStatus != null" >
+        DICTIONARY_STATUS = #{dictionaryStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyUser != null" >
+        LAST_MODIFY_USER = #{lastModifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyTime != null" >
+        LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dictionaryDesc != null" >
+        DICTIONARY_DESC = #{dictionaryDesc,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where DICTIONARY_CODE = #{dictionaryCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.cast.serviceman.api.entity.Dictionary" >
+
+    update t_dictionary
+    set DICTIONARY_NAME = #{dictionaryName,jdbcType=VARCHAR},
+      DICTIONARY_TYPE_CODE = #{dictionaryTypeCode,jdbcType=VARCHAR},
+      DICTIONARY_ORDER = #{dictionaryOrder,jdbcType=INTEGER},
+      DICTIONARY_STATUS = #{dictionaryStatus,jdbcType=VARCHAR},
+      CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      LAST_MODIFY_USER = #{lastModifyUser,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP},
+      DICTIONARY_DESC = #{dictionaryDesc,jdbcType=LONGVARCHAR}
+    where DICTIONARY_CODE = #{dictionaryCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cast.serviceman.api.entity.Dictionary" >
+
+    update t_dictionary
+    set DICTIONARY_NAME = #{dictionaryName,jdbcType=VARCHAR},
+      DICTIONARY_TYPE_CODE = #{dictionaryTypeCode,jdbcType=VARCHAR},
+      DICTIONARY_ORDER = #{dictionaryOrder,jdbcType=INTEGER},
+      DICTIONARY_STATUS = #{dictionaryStatus,jdbcType=VARCHAR},
+      CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      LAST_MODIFY_USER = #{lastModifyUser,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP}
+    where DICTIONARY_CODE = #{dictionaryCode,jdbcType=VARCHAR}
+  </update>
+</mapper>

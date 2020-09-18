@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cast.serviceman.server.mapper.SassDtoMapper" >
+  <resultMap id="BaseResultMap" type="com.cast.serviceman.api.entity.SassDto" >
+    <id column="SAAS_ID" property="saasId" jdbcType="VARCHAR" />
+    <result column="SAAS_NAME" property="saasName" jdbcType="VARCHAR" />
+    <result column="SAAS_KEY" property="saasKey" jdbcType="CHAR" />
+    <result column="SAAS_PID" property="saasPid" jdbcType="INTEGER" />
+    <result column="SERVICE_COURSE_NAME" property="serviceCourseName" jdbcType="VARCHAR" />
+    <result column="DICTIONARIES_ID" property="dictionariesId" jdbcType="VARCHAR" />
+    <result column="VIRTUAL_MACHINE_ID" property="virtualMachineId" jdbcType="VARCHAR" />
+    <result column="SAAS_RUNNING_STATUS" property="saasRunningStatus" jdbcType="VARCHAR" />
+    <result column="SAAS_TYPE" property="saasType" jdbcType="VARCHAR" />
+    <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="LAST_MODIFY_USER" property="lastModifyUser" jdbcType="VARCHAR" />
+    <result column="LAST_MODIFY_TIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
+    <result column="SAT_ID" property="satId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SAAS_ID, SAAS_NAME, SAAS_KEY, SAAS_PID, SERVICE_COURSE_NAME, DICTIONARIES_ID, VIRTUAL_MACHINE_ID, 
+    SAAS_RUNNING_STATUS, SAAS_TYPE, CREATE_USER, CREATE_TIME, LAST_MODIFY_USER,
+    LAST_MODIFY_TIME,SAT_ID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_saas
+    where SAAS_ID = #{saasId,jdbcType=VARCHAR}
+  </select>
+
+
+  <select id="selectBySatId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from t_saas
+    where SAT_ID = #{satId}
+  </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_saas
+    where SAAS_ID = #{saasId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.cast.serviceman.api.entity.SassDto" >
+    insert into t_saas (SAAS_ID, SAAS_NAME, SAAS_KEY, 
+      SAAS_PID, SERVICE_COURSE_NAME, DICTIONARIES_ID, 
+      VIRTUAL_MACHINE_ID, SAAS_RUNNING_STATUS, SAAS_TYPE, 
+      CREATE_USER, CREATE_TIME, LAST_MODIFY_USER, 
+      LAST_MODIFY_TIME,SAT_ID)
+    values (#{saasId,jdbcType=VARCHAR}, #{saasName,jdbcType=VARCHAR}, #{saasKey,jdbcType=CHAR}, 
+      #{saasPid,jdbcType=INTEGER}, #{serviceCourseName,jdbcType=VARCHAR}, #{dictionariesId,jdbcType=VARCHAR}, 
+      #{virtualMachineId,jdbcType=VARCHAR}, #{saasRunningStatus,jdbcType=VARCHAR}, #{saasType,jdbcType=VARCHAR}, 
+      #{createUser,jdbcType=VARCHAR}, NOW(), #{lastModifyUser,jdbcType=VARCHAR},
+      NOW(),#{satId})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cast.serviceman.api.entity.SassDto" >
+    insert into t_saas
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="saasId != null" >
+        SAAS_ID,
+      </if>
+      <if test="saasName != null" >
+        SAAS_NAME,
+      </if>
+      <if test="saasKey != null" >
+        SAAS_KEY,
+      </if>
+      <if test="saasPid != null" >
+        SAAS_PID,
+      </if>
+      <if test="serviceCourseName != null" >
+        SERVICE_COURSE_NAME,
+      </if>
+      <if test="dictionariesId != null" >
+        DICTIONARIES_ID,
+      </if>
+      <if test="virtualMachineId != null" >
+        VIRTUAL_MACHINE_ID,
+      </if>
+      <if test="saasRunningStatus != null" >
+        SAAS_RUNNING_STATUS,
+      </if>
+      <if test="saasType != null" >
+        SAAS_TYPE,
+      </if>
+      <if test="createUser != null" >
+        CREATE_USER,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="lastModifyUser != null" >
+        LAST_MODIFY_USER,
+      </if>
+      <if test="lastModifyTime != null" >
+        LAST_MODIFY_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="saasId != null" >
+        #{saasId,jdbcType=VARCHAR},
+      </if>
+      <if test="saasName != null" >
+        #{saasName,jdbcType=VARCHAR},
+      </if>
+      <if test="saasKey != null" >
+        #{saasKey,jdbcType=CHAR},
+      </if>
+      <if test="saasPid != null" >
+        #{saasPid,jdbcType=INTEGER},
+      </if>
+      <if test="serviceCourseName != null" >
+        #{serviceCourseName,jdbcType=VARCHAR},
+      </if>
+      <if test="dictionariesId != null" >
+        #{dictionariesId,jdbcType=VARCHAR},
+      </if>
+      <if test="virtualMachineId != null" >
+        #{virtualMachineId,jdbcType=VARCHAR},
+      </if>
+      <if test="saasRunningStatus != null" >
+        #{saasRunningStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="saasType != null" >
+        #{saasType,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyUser != null" >
+        #{lastModifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyTime != null" >
+        #{lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cast.serviceman.api.entity.SassDto" >
+    update t_saas
+    <set >
+      <if test="saasName != null" >
+        SAAS_NAME = #{saasName,jdbcType=VARCHAR},
+      </if>
+      <if test="saasKey != null" >
+        SAAS_KEY = #{saasKey,jdbcType=CHAR},
+      </if>
+      <if test="saasPid != null" >
+        SAAS_PID = #{saasPid,jdbcType=INTEGER},
+      </if>
+      <if test="serviceCourseName != null" >
+        SERVICE_COURSE_NAME = #{serviceCourseName,jdbcType=VARCHAR},
+      </if>
+      <if test="dictionariesId != null" >
+        DICTIONARIES_ID = #{dictionariesId,jdbcType=VARCHAR},
+      </if>
+      <if test="virtualMachineId != null" >
+        VIRTUAL_MACHINE_ID = #{virtualMachineId,jdbcType=VARCHAR},
+      </if>
+      <if test="saasRunningStatus != null" >
+        SAAS_RUNNING_STATUS = #{saasRunningStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="saasType != null" >
+        SAAS_TYPE = #{saasType,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyUser != null" >
+        LAST_MODIFY_USER = #{lastModifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyTime != null" >
+        LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where SAAS_ID = #{saasId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cast.serviceman.api.entity.SassDto" >
+    update t_saas
+    set SAAS_NAME = #{saasName,jdbcType=VARCHAR},
+      SAAS_KEY = #{saasKey,jdbcType=CHAR},
+      SAAS_PID = #{saasPid,jdbcType=INTEGER},
+      SERVICE_COURSE_NAME = #{serviceCourseName,jdbcType=VARCHAR},
+      DICTIONARIES_ID = #{dictionariesId,jdbcType=VARCHAR},
+      VIRTUAL_MACHINE_ID = #{virtualMachineId,jdbcType=VARCHAR},
+      SAAS_RUNNING_STATUS = #{saasRunningStatus,jdbcType=VARCHAR},
+      SAAS_TYPE = #{saasType,jdbcType=VARCHAR},
+      CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      LAST_MODIFY_USER = #{lastModifyUser,jdbcType=VARCHAR},
+      LAST_MODIFY_TIME = NOW(),
+      SAT_ID = #{satId}
+    where SAAS_ID = #{saasId,jdbcType=VARCHAR}
+  </update>
+</mapper>

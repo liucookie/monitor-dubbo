@@ -5,19 +5,13 @@
 
 <generatorConfiguration>
     <!--sqlserver连接数据库jar 这里选择自己本地位置-->
-    <!--    <classPathEntry location="D:/repository/com/microsoft/sqlserver/mssql-jdbc/7.4.1.jre8/mssql-jdbc-7.4.1.jre8.jar" />-->
-    <classPathEntry location="D:/repository/mysql/mysql-connector-java/5.1.38/mysql-connector-java-5.1.38.jar"/>
+    <classPathEntry location="D:/MavenRepository3.6.3/mysql/mysql-connector-java/5.1.38/mysql-connector-java-5.1.38.jar"/>
     <context id="testTables" targetRuntime="MyBatis3">
         <commentGenerator>
             <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
             <property name="suppressAllComments" value="true" />
         </commentGenerator>
         <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
-        <!--        <jdbcConnection driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver"-->
-        <!--                        connectionURL="jdbc:sqlserver://192.168.5.181:1433;DatabaseName=KeepSecretManPlatDB_504"-->
-        <!--                        userId="sa"-->
-        <!--                        password="123">-->
-        <!--        </jdbcConnection>-->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
                         connectionURL="jdbc:mysql://192.168.0.118:3306/serviceman_db?useUnicode=true"
                         userId="root"
@@ -57,6 +51,6 @@
         </javaClientGenerator>
         <!-- 指定数据库表 -->
         <!--<table schema="" tableName="s_basic_service"></table>-->
-        <table schema="" tableName="t_service" domainObjectName="ServiceDto" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table schema="" tableName="t_dictionary" domainObjectName="Dictionary" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
     </context>
 </generatorConfiguration>

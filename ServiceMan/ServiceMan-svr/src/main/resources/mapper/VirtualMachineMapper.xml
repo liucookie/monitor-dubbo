@@ -19,12 +19,24 @@
     <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
     <result column="LAST_MODIFY_USER" property="lastModifyUser" jdbcType="VARCHAR" />
     <result column="LAST_MODIFY_TIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
+    <result column="CPU_COND" property="cpuCond" jdbcType="VARCHAR" />
+    <result column="CPU_KEY" property="cpuKey" jdbcType="VARCHAR" />
+    <result column="MEMORY_COND" property="memoryCond" jdbcType="VARCHAR" />
+    <result column="MEMORY_KEY" property="memoryKey" jdbcType="VARCHAR" />
+    <result column="DISK_COND" property="diskCond" jdbcType="VARCHAR" />
+    <result column="DISK_KEY" property="diskKey" jdbcType="VARCHAR" />
+    <result column="RUNNING_COND" property="runningCond" jdbcType="VARCHAR" />
+    <result column="RUNNING_KEY" property="runningKey" jdbcType="VARCHAR" />
+    <result column="LOG_COND" property="logCond" jdbcType="VARCHAR" />
+    <result column="LOG_KEY" property="logKey" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     VIRTUAL_MACHINE_ID, VIRTUALMACHINE_NAME, GROUP_ID, DICTIONARIES_ID, VIRTUAL_MACHINE_IP, 
     VIRTUAL_MACHINE_ACCOUNT, VIRTUAL_MACHINE_PASSWORD, VIRTUAL_MACHINE_OPERATING_STATE, 
     SERVICE_LIVING_NAME, VIRTUALMACHINE_DEPLOY_STATE, VIRTUAL_MACHINE_RUNNING_TIME, VIRTUAL_MACHINE_MEMORY, 
-    VIRTUAL_MACHINE_STORAGE, CREATE_USER, CREATE_TIME, LAST_MODIFY_USER, LAST_MODIFY_TIME
+    VIRTUAL_MACHINE_STORAGE, CREATE_USER, CREATE_TIME, LAST_MODIFY_USER, LAST_MODIFY_TIME,
+    CPU_COND, CPU_KEY, MEMORY_COND, MEMORY_KEY, DISK_COND, DISK_KEY, RUNNING_COND, RUNNING_KEY,
+    LOG_COND, LOG_KEY
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -55,15 +67,22 @@
       VIRTUALMACHINE_DEPLOY_STATE, VIRTUAL_MACHINE_RUNNING_TIME, 
       VIRTUAL_MACHINE_MEMORY, VIRTUAL_MACHINE_STORAGE, 
       CREATE_USER, CREATE_TIME, LAST_MODIFY_USER, 
-      LAST_MODIFY_TIME)
+      LAST_MODIFY_TIME,
+      CPU_COND, CPU_KEY, MEMORY_COND, MEMORY_KEY,
+      DISK_COND, DISK_KEY, RUNNING_COND, RUNNING_KEY,
+    LOG_COND, LOG_KEY)
     values (#{virtualMachineId,jdbcType=VARCHAR}, #{virtualmachineName,jdbcType=VARCHAR}, 
       #{groupId,jdbcType=VARCHAR}, #{dictionariesId,jdbcType=VARCHAR}, #{virtualMachineIp,jdbcType=VARCHAR}, 
       #{virtualMachineAccount,jdbcType=VARCHAR}, #{virtualMachinePassword,jdbcType=VARCHAR}, 
       #{virtualMachineOperatingState,jdbcType=VARCHAR}, #{serviceLivingName,jdbcType=VARCHAR}, 
       #{virtualmachineDeployState,jdbcType=VARCHAR}, #{virtualMachineRunningTime,jdbcType=TIMESTAMP}, 
       #{virtualMachineMemory,jdbcType=VARCHAR}, #{virtualMachineStorage,jdbcType=VARCHAR}, 
-      #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastModifyUser,jdbcType=VARCHAR}, 
-      #{lastModifyTime,jdbcType=TIMESTAMP})
+      #{createUser,jdbcType=VARCHAR}, NOW(), #{lastModifyUser,jdbcType=VARCHAR},
+      NOW(),
+       #{cpuCond,jdbcType=VARCHAR}, #{cpuKey,jdbcType=VARCHAR}, #{memoryCond,jdbcType=VARCHAR},
+      #{memoryKey,jdbcType=VARCHAR}, #{diskCond,jdbcType=VARCHAR}, #{diskKey,jdbcType=VARCHAR},
+      #{runningCond,jdbcType=VARCHAR}, #{runningKey,jdbcType=VARCHAR}, #{logCond,jdbcType=VARCHAR},
+      #{logKey,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.cast.serviceman.api.entity.VirtualMachine" >
     insert into t_virtual_machine
@@ -243,9 +262,18 @@
       VIRTUAL_MACHINE_MEMORY = #{virtualMachineMemory,jdbcType=VARCHAR},
       VIRTUAL_MACHINE_STORAGE = #{virtualMachineStorage,jdbcType=VARCHAR},
       CREATE_USER = #{createUser,jdbcType=VARCHAR},
-      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
       LAST_MODIFY_USER = #{lastModifyUser,jdbcType=VARCHAR},
-      LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP}
+      LAST_MODIFY_TIME = NOW(),
+      CPU_COND = #{cpuCond,jdbcType=VARCHAR},
+      CPU_KEY = #{cpuKey,jdbcType=VARCHAR},
+      MEMORY_COND = #{memoryCond,jdbcType=VARCHAR},
+      MEMORY_KEY = #{memoryKey,jdbcType=VARCHAR},
+      DISK_COND = #{diskCond,jdbcType=VARCHAR},
+      DISK_KEY = #{diskKey,jdbcType=VARCHAR},
+      RUNNING_COND = #{runningCond,jdbcType=VARCHAR},
+      RUNNING_KEY = #{runningKey,jdbcType=VARCHAR},
+      LOG_COND = #{logCond,jdbcType=VARCHAR},
+      LOG_KEY = #{logKey,jdbcType=VARCHAR}
     where VIRTUAL_MACHINE_ID = #{virtualMachineId,jdbcType=VARCHAR}
   </update>
 </mapper>

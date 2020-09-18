@@ -20,4 +20,11 @@ public interface ServiceDtoMapper {
     int updateByPrimaryKeySelective(ServiceDto record);
 
     int updateByPrimaryKey(ServiceDto record);
+
+    /**
+     * 查询所有的虚拟机信息
+     * @return
+     */
+    List<ServiceDto> queryAll();
+
 }

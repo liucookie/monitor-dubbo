@@ -16,7 +16,7 @@ public class SBasicServiceDto implements Serializable {
 
     private String basicServiceName;
 
-    private String virtualMachineId;
+    private String serviceId;
 
     private String basicServiceAccount;
 
@@ -56,6 +56,96 @@ public class SBasicServiceDto implements Serializable {
 
     private String logKey;
 
+    private String groupId;
+
+    public String getCpuCond() {
+        return cpuCond;
+    }
+
+    public void setCpuCond(String cpuCond) {
+        this.cpuCond = cpuCond;
+    }
+
+    public String getCpuKey() {
+        return cpuKey;
+    }
+
+    public void setCpuKey(String cpuKey) {
+        this.cpuKey = cpuKey;
+    }
+
+    public String getMemoryCond() {
+        return memoryCond;
+    }
+
+    public void setMemoryCond(String memoryCond) {
+        this.memoryCond = memoryCond;
+    }
+
+    public String getMemoryKey() {
+        return memoryKey;
+    }
+
+    public void setMemoryKey(String memoryKey) {
+        this.memoryKey = memoryKey;
+    }
+
+    public String getDiskCond() {
+        return diskCond;
+    }
+
+    public void setDiskCond(String diskCond) {
+        this.diskCond = diskCond;
+    }
+
+    public String getDiskKey() {
+        return diskKey;
+    }
+
+    public void setDiskKey(String diskKey) {
+        this.diskKey = diskKey;
+    }
+
+    public String getRunningCond() {
+        return runningCond;
+    }
+
+    public void setRunningCond(String runningCond) {
+        this.runningCond = runningCond;
+    }
+
+    public String getRunningKey() {
+        return runningKey;
+    }
+
+    public void setRunningKey(String runningKey) {
+        this.runningKey = runningKey;
+    }
+
+    public String getLogCond() {
+        return logCond;
+    }
+
+    public void setLogCond(String logCond) {
+        this.logCond = logCond;
+    }
+
+    public String getLogKey() {
+        return logKey;
+    }
+
+    public void setLogKey(String logKey) {
+        this.logKey = logKey;
+    }
+
+    public String getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
+    }
+
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
@@ -84,12 +174,12 @@ public class SBasicServiceDto implements Serializable {
         this.basicServiceName = basicServiceName == null ? null : basicServiceName.trim();
     }
 
-    public String getVirtualMachineId() {
-        return virtualMachineId;
+    public String getServiceId() {
+        return serviceId;
     }
 
-    public void setVirtualMachineId(String virtualMachineId) {
-        this.virtualMachineId = virtualMachineId == null ? null : virtualMachineId.trim();
+    public void setServiceId(String serviceId) {
+        this.serviceId = serviceId;
     }
 
     public String getBasicServiceAccount() {

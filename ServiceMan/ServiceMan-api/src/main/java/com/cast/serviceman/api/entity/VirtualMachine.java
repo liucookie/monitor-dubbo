@@ -44,6 +44,120 @@ public class VirtualMachine implements Serializable {
 
     private Date lastModifyTime;
 
+    private String virtualId;
+
+    private String cpuCond;
+
+    private String cpuKey;
+
+    private String memoryCond;
+
+    private String memoryKey;
+
+    private String diskCond;
+
+    private String diskKey;
+
+    private String runningCond;
+
+    private String runningKey;
+
+    private String logCond;
+
+    private String logKey;
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public String getVirtualId() {
+        return virtualId;
+    }
+
+    public void setVirtualId(String virtualId) {
+        this.virtualId = virtualId;
+    }
+
+    public String getCpuCond() {
+        return cpuCond;
+    }
+
+    public void setCpuCond(String cpuCond) {
+        this.cpuCond = cpuCond;
+    }
+
+    public String getCpuKey() {
+        return cpuKey;
+    }
+
+    public void setCpuKey(String cpuKey) {
+        this.cpuKey = cpuKey;
+    }
+
+    public String getMemoryCond() {
+        return memoryCond;
+    }
+
+    public void setMemoryCond(String memoryCond) {
+        this.memoryCond = memoryCond;
+    }
+
+    public String getMemoryKey() {
+        return memoryKey;
+    }
+
+    public void setMemoryKey(String memoryKey) {
+        this.memoryKey = memoryKey;
+    }
+
+    public String getDiskCond() {
+        return diskCond;
+    }
+
+    public void setDiskCond(String diskCond) {
+        this.diskCond = diskCond;
+    }
+
+    public String getDiskKey() {
+        return diskKey;
+    }
+
+    public void setDiskKey(String diskKey) {
+        this.diskKey = diskKey;
+    }
+
+    public String getRunningCond() {
+        return runningCond;
+    }
+
+    public void setRunningCond(String runningCond) {
+        this.runningCond = runningCond;
+    }
+
+    public String getRunningKey() {
+        return runningKey;
+    }
+
+    public void setRunningKey(String runningKey) {
+        this.runningKey = runningKey;
+    }
+
+    public String getLogCond() {
+        return logCond;
+    }
+
+    public void setLogCond(String logCond) {
+        this.logCond = logCond;
+    }
+
+    public String getLogKey() {
+        return logKey;
+    }
+
+    public void setLogKey(String logKey) {
+        this.logKey = logKey;
+    }
+
     public String getVirtualMachineId() {
         return virtualMachineId;
     }

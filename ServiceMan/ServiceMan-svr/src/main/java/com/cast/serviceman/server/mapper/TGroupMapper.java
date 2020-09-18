@@ -11,6 +11,8 @@ public interface TGroupMapper {
 
     int insertSelective(TGroup record);
 
+    String selectByName(String name);
+
     TGroup selectByPrimaryKey(String groupId);
 
     List<TGroup> queryAllGroup(String pId);

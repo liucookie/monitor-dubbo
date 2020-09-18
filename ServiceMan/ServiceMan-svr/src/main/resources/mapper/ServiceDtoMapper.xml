@@ -1,63 +1,70 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.cast.serviceman.server.mapper.ServiceDtoMapper" >
-  <resultMap id="BaseResultMap" type="com.cast.serviceman.api.entity.ServiceDto" >
-    <id column="SERVICE_ID" property="serviceId" jdbcType="VARCHAR" />
-    <result column="DICTIONARIES_TABLE_ID" property="dictionariesTableId" jdbcType="VARCHAR" />
-    <result column="GROUP_ID" property="groupId" jdbcType="VARCHAR" />
-    <result column="SERVICE_NAME" property="serviceName" jdbcType="VARCHAR" />
-    <result column="SERVICE_IP" property="serviceIp" jdbcType="VARCHAR" />
-    <result column="SERVICE_ACCOUNT" property="serviceAccount" jdbcType="VARCHAR" />
-    <result column="SERVICE_PASSWORD" property="servicePassword" jdbcType="VARCHAR" />
-    <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
-    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="LAST_MODIFY_USER" property="lastModifyUser" jdbcType="VARCHAR" />
-    <result column="LAST_MODIFY_TIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
-    <result column="VIRTUAL_ID" property="virtualId" jdbcType="VARCHAR" />
-    <result column="CPU_COND" property="cpuCond" jdbcType="VARCHAR" />
-    <result column="CPU_KEY" property="cpuKey" jdbcType="VARCHAR" />
-    <result column="MEMORY_COND" property="memoryCond" jdbcType="VARCHAR" />
-    <result column="MEMORY_KEY" property="memoryKey" jdbcType="VARCHAR" />
-    <result column="DISK_COND" property="diskCond" jdbcType="VARCHAR" />
-    <result column="DISK_KEY" property="diskKey" jdbcType="VARCHAR" />
-    <result column="RUNNING_COND" property="runningCond" jdbcType="VARCHAR" />
-    <result column="RUNNING_KEY" property="runningKey" jdbcType="VARCHAR" />
-    <result column="LOG_COND" property="logCond" jdbcType="VARCHAR" />
-    <result column="LOG_KEY" property="logKey" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
+<mapper namespace="com.cast.serviceman.server.mapper.ServiceDtoMapper">
+    <resultMap id="BaseResultMap" type="com.cast.serviceman.api.entity.ServiceDto">
+        <id column="SERVICE_ID" property="serviceId" jdbcType="VARCHAR"/>
+        <result column="DICTIONARIES_TABLE_ID" property="dictionariesTableId" jdbcType="VARCHAR"/>
+        <result column="GROUP_ID" property="groupId" jdbcType="VARCHAR"/>
+        <result column="SERVICE_NAME" property="serviceName" jdbcType="VARCHAR"/>
+        <result column="SERVICE_IP" property="serviceIp" jdbcType="VARCHAR"/>
+        <result column="SERVICE_ACCOUNT" property="serviceAccount" jdbcType="VARCHAR"/>
+        <result column="SERVICE_PASSWORD" property="servicePassword" jdbcType="VARCHAR"/>
+        <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="LAST_MODIFY_USER" property="lastModifyUser" jdbcType="VARCHAR"/>
+        <result column="LAST_MODIFY_TIME" property="lastModifyTime" jdbcType="TIMESTAMP"/>
+        <result column="VIRTUAL_ID" property="virtualId" jdbcType="VARCHAR"/>
+        <result column="CPU_COND" property="cpuCond" jdbcType="VARCHAR"/>
+        <result column="CPU_KEY" property="cpuKey" jdbcType="VARCHAR"/>
+        <result column="MEMORY_COND" property="memoryCond" jdbcType="VARCHAR"/>
+        <result column="MEMORY_KEY" property="memoryKey" jdbcType="VARCHAR"/>
+        <result column="DISK_COND" property="diskCond" jdbcType="VARCHAR"/>
+        <result column="DISK_KEY" property="diskKey" jdbcType="VARCHAR"/>
+        <result column="RUNNING_COND" property="runningCond" jdbcType="VARCHAR"/>
+        <result column="RUNNING_KEY" property="runningKey" jdbcType="VARCHAR"/>
+        <result column="LOG_COND" property="logCond" jdbcType="VARCHAR"/>
+        <result column="LOG_KEY" property="logKey" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     SERVICE_ID, DICTIONARIES_TABLE_ID, GROUP_ID, SERVICE_NAME, SERVICE_IP, SERVICE_ACCOUNT, 
     SERVICE_PASSWORD, CREATE_USER, CREATE_TIME, LAST_MODIFY_USER, LAST_MODIFY_TIME, VIRTUAL_ID, 
     CPU_COND, CPU_KEY, MEMORY_COND, MEMORY_KEY, DISK_COND, DISK_KEY, RUNNING_COND, RUNNING_KEY, 
     LOG_COND, LOG_KEY
   </sql>
 
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
-    <include refid="Base_Column_List" />
-    from t_service
-    where SERVICE_ID = #{serviceId,jdbcType=VARCHAR}
-  </select>
-
-  <select id="queryVirtualByGId" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select
-    <include refid="Base_Column_List" />
-    from t_service
-    where VIRTUAL_ID = #{virtualId,jdbcType=VARCHAR}
-  </select>
+    <select id="queryAll" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from t_service
+    </select>
 
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from t_service
+        where SERVICE_ID = #{serviceId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="queryVirtualByGId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from t_service
+        where VIRTUAL_ID = #{virtualId,jdbcType=VARCHAR}
+    </select>
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from t_service
     where SERVICE_ID = #{serviceId,jdbcType=VARCHAR}
   </delete>
 
-  <delete id="deleteByVirtualId" parameterType="java.lang.String" >
+    <delete id="deleteByVirtualId" parameterType="java.lang.String">
     delete from t_service
     where VIRTUAL_ID = #{virtualId,jdbcType=VARCHAR}
   </delete>
 
-  <insert id="insert" parameterType="com.cast.serviceman.api.entity.ServiceDto" >
+    <insert id="insert" parameterType="com.cast.serviceman.api.entity.ServiceDto">
     insert into t_service (SERVICE_ID, DICTIONARIES_TABLE_ID, GROUP_ID, 
       SERVICE_NAME, SERVICE_IP, SERVICE_ACCOUNT, 
       SERVICE_PASSWORD, CREATE_USER, CREATE_TIME, 
@@ -75,215 +82,215 @@
       #{runningCond,jdbcType=VARCHAR}, #{runningKey,jdbcType=VARCHAR}, #{logCond,jdbcType=VARCHAR}, 
       #{logKey,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.cast.serviceman.api.entity.ServiceDto" >
-    insert into t_service
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="serviceId != null" >
-        SERVICE_ID,
-      </if>
-      <if test="dictionariesTableId != null" >
-        DICTIONARIES_TABLE_ID,
-      </if>
-      <if test="groupId != null" >
-        GROUP_ID,
-      </if>
-      <if test="serviceName != null" >
-        SERVICE_NAME,
-      </if>
-      <if test="serviceIp != null" >
-        SERVICE_IP,
-      </if>
-      <if test="serviceAccount != null" >
-        SERVICE_ACCOUNT,
-      </if>
-      <if test="servicePassword != null" >
-        SERVICE_PASSWORD,
-      </if>
-      <if test="createUser != null" >
-        CREATE_USER,
-      </if>
-      <if test="createTime != null" >
-        CREATE_TIME,
-      </if>
-      <if test="lastModifyUser != null" >
-        LAST_MODIFY_USER,
-      </if>
-      <if test="lastModifyTime != null" >
-        LAST_MODIFY_TIME,
-      </if>
-      <if test="virtualId != null" >
-        VIRTUAL_ID,
-      </if>
-      <if test="cpuCond != null" >
-        CPU_COND,
-      </if>
-      <if test="cpuKey != null" >
-        CPU_KEY,
-      </if>
-      <if test="memoryCond != null" >
-        MEMORY_COND,
-      </if>
-      <if test="memoryKey != null" >
-        MEMORY_KEY,
-      </if>
-      <if test="diskCond != null" >
-        DISK_COND,
-      </if>
-      <if test="diskKey != null" >
-        DISK_KEY,
-      </if>
-      <if test="runningCond != null" >
-        RUNNING_COND,
-      </if>
-      <if test="runningKey != null" >
-        RUNNING_KEY,
-      </if>
-      <if test="logCond != null" >
-        LOG_COND,
-      </if>
-      <if test="logKey != null" >
-        LOG_KEY,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="serviceId != null" >
-        #{serviceId,jdbcType=VARCHAR},
-      </if>
-      <if test="dictionariesTableId != null" >
-        #{dictionariesTableId,jdbcType=VARCHAR},
-      </if>
-      <if test="groupId != null" >
-        #{groupId,jdbcType=VARCHAR},
-      </if>
-      <if test="serviceName != null" >
-        #{serviceName,jdbcType=VARCHAR},
-      </if>
-      <if test="serviceIp != null" >
-        #{serviceIp,jdbcType=VARCHAR},
-      </if>
-      <if test="serviceAccount != null" >
-        #{serviceAccount,jdbcType=VARCHAR},
-      </if>
-      <if test="servicePassword != null" >
-        #{servicePassword,jdbcType=VARCHAR},
-      </if>
-      <if test="createUser != null" >
-        #{createUser,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="lastModifyUser != null" >
-        #{lastModifyUser,jdbcType=VARCHAR},
-      </if>
-      <if test="lastModifyTime != null" >
-        #{lastModifyTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="virtualId != null" >
-        #{virtualId,jdbcType=VARCHAR},
-      </if>
-      <if test="cpuCond != null" >
-        #{cpuCond,jdbcType=VARCHAR},
-      </if>
-      <if test="cpuKey != null" >
-        #{cpuKey,jdbcType=VARCHAR},
-      </if>
-      <if test="memoryCond != null" >
-        #{memoryCond,jdbcType=VARCHAR},
-      </if>
-      <if test="memoryKey != null" >
-        #{memoryKey,jdbcType=VARCHAR},
-      </if>
-      <if test="diskCond != null" >
-        #{diskCond,jdbcType=VARCHAR},
-      </if>
-      <if test="diskKey != null" >
-        #{diskKey,jdbcType=VARCHAR},
-      </if>
-      <if test="runningCond != null" >
-        #{runningCond,jdbcType=VARCHAR},
-      </if>
-      <if test="runningKey != null" >
-        #{runningKey,jdbcType=VARCHAR},
-      </if>
-      <if test="logCond != null" >
-        #{logCond,jdbcType=VARCHAR},
-      </if>
-      <if test="logKey != null" >
-        #{logKey,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.cast.serviceman.api.entity.ServiceDto" >
-    update t_service
-    <set >
-      <if test="dictionariesTableId != null" >
-        DICTIONARIES_TABLE_ID = #{dictionariesTableId,jdbcType=VARCHAR},
-      </if>
-      <if test="groupId != null" >
-        GROUP_ID = #{groupId,jdbcType=VARCHAR},
-      </if>
-      <if test="serviceName != null" >
-        SERVICE_NAME = #{serviceName,jdbcType=VARCHAR},
-      </if>
-      <if test="serviceIp != null" >
-        SERVICE_IP = #{serviceIp,jdbcType=VARCHAR},
-      </if>
-      <if test="serviceAccount != null" >
-        SERVICE_ACCOUNT = #{serviceAccount,jdbcType=VARCHAR},
-      </if>
-      <if test="servicePassword != null" >
-        SERVICE_PASSWORD = #{servicePassword,jdbcType=VARCHAR},
-      </if>
-      <if test="createUser != null" >
-        CREATE_USER = #{createUser,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="lastModifyUser != null" >
-        LAST_MODIFY_USER = #{lastModifyUser,jdbcType=VARCHAR},
-      </if>
-      <if test="lastModifyTime != null" >
-        LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="virtualId != null" >
-        VIRTUAL_ID = #{virtualId,jdbcType=VARCHAR},
-      </if>
-      <if test="cpuCond != null" >
-        CPU_COND = #{cpuCond,jdbcType=VARCHAR},
-      </if>
-      <if test="cpuKey != null" >
-        CPU_KEY = #{cpuKey,jdbcType=VARCHAR},
-      </if>
-      <if test="memoryCond != null" >
-        MEMORY_COND = #{memoryCond,jdbcType=VARCHAR},
-      </if>
-      <if test="memoryKey != null" >
-        MEMORY_KEY = #{memoryKey,jdbcType=VARCHAR},
-      </if>
-      <if test="diskCond != null" >
-        DISK_COND = #{diskCond,jdbcType=VARCHAR},
-      </if>
-      <if test="diskKey != null" >
-        DISK_KEY = #{diskKey,jdbcType=VARCHAR},
-      </if>
-      <if test="runningCond != null" >
-        RUNNING_COND = #{runningCond,jdbcType=VARCHAR},
-      </if>
-      <if test="runningKey != null" >
-        RUNNING_KEY = #{runningKey,jdbcType=VARCHAR},
-      </if>
-      <if test="logCond != null" >
-        LOG_COND = #{logCond,jdbcType=VARCHAR},
-      </if>
-      <if test="logKey != null" >
-        LOG_KEY = #{logKey,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where SERVICE_ID = #{serviceId,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.cast.serviceman.api.entity.ServiceDto" >
+    <insert id="insertSelective" parameterType="com.cast.serviceman.api.entity.ServiceDto">
+        insert into t_service
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="serviceId != null">
+                SERVICE_ID,
+            </if>
+            <if test="dictionariesTableId != null">
+                DICTIONARIES_TABLE_ID,
+            </if>
+            <if test="groupId != null">
+                GROUP_ID,
+            </if>
+            <if test="serviceName != null">
+                SERVICE_NAME,
+            </if>
+            <if test="serviceIp != null">
+                SERVICE_IP,
+            </if>
+            <if test="serviceAccount != null">
+                SERVICE_ACCOUNT,
+            </if>
+            <if test="servicePassword != null">
+                SERVICE_PASSWORD,
+            </if>
+            <if test="createUser != null">
+                CREATE_USER,
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME,
+            </if>
+            <if test="lastModifyUser != null">
+                LAST_MODIFY_USER,
+            </if>
+            <if test="lastModifyTime != null">
+                LAST_MODIFY_TIME,
+            </if>
+            <if test="virtualId != null">
+                VIRTUAL_ID,
+            </if>
+            <if test="cpuCond != null">
+                CPU_COND,
+            </if>
+            <if test="cpuKey != null">
+                CPU_KEY,
+            </if>
+            <if test="memoryCond != null">
+                MEMORY_COND,
+            </if>
+            <if test="memoryKey != null">
+                MEMORY_KEY,
+            </if>
+            <if test="diskCond != null">
+                DISK_COND,
+            </if>
+            <if test="diskKey != null">
+                DISK_KEY,
+            </if>
+            <if test="runningCond != null">
+                RUNNING_COND,
+            </if>
+            <if test="runningKey != null">
+                RUNNING_KEY,
+            </if>
+            <if test="logCond != null">
+                LOG_COND,
+            </if>
+            <if test="logKey != null">
+                LOG_KEY,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="serviceId != null">
+                #{serviceId,jdbcType=VARCHAR},
+            </if>
+            <if test="dictionariesTableId != null">
+                #{dictionariesTableId,jdbcType=VARCHAR},
+            </if>
+            <if test="groupId != null">
+                #{groupId,jdbcType=VARCHAR},
+            </if>
+            <if test="serviceName != null">
+                #{serviceName,jdbcType=VARCHAR},
+            </if>
+            <if test="serviceIp != null">
+                #{serviceIp,jdbcType=VARCHAR},
+            </if>
+            <if test="serviceAccount != null">
+                #{serviceAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="servicePassword != null">
+                #{servicePassword,jdbcType=VARCHAR},
+            </if>
+            <if test="createUser != null">
+                #{createUser,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUser != null">
+                #{lastModifyUser,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyTime != null">
+                #{lastModifyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="virtualId != null">
+                #{virtualId,jdbcType=VARCHAR},
+            </if>
+            <if test="cpuCond != null">
+                #{cpuCond,jdbcType=VARCHAR},
+            </if>
+            <if test="cpuKey != null">
+                #{cpuKey,jdbcType=VARCHAR},
+            </if>
+            <if test="memoryCond != null">
+                #{memoryCond,jdbcType=VARCHAR},
+            </if>
+            <if test="memoryKey != null">
+                #{memoryKey,jdbcType=VARCHAR},
+            </if>
+            <if test="diskCond != null">
+                #{diskCond,jdbcType=VARCHAR},
+            </if>
+            <if test="diskKey != null">
+                #{diskKey,jdbcType=VARCHAR},
+            </if>
+            <if test="runningCond != null">
+                #{runningCond,jdbcType=VARCHAR},
+            </if>
+            <if test="runningKey != null">
+                #{runningKey,jdbcType=VARCHAR},
+            </if>
+            <if test="logCond != null">
+                #{logCond,jdbcType=VARCHAR},
+            </if>
+            <if test="logKey != null">
+                #{logKey,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.cast.serviceman.api.entity.ServiceDto">
+        update t_service
+        <set>
+            <if test="dictionariesTableId != null">
+                DICTIONARIES_TABLE_ID = #{dictionariesTableId,jdbcType=VARCHAR},
+            </if>
+            <if test="groupId != null">
+                GROUP_ID = #{groupId,jdbcType=VARCHAR},
+            </if>
+            <if test="serviceName != null">
+                SERVICE_NAME = #{serviceName,jdbcType=VARCHAR},
+            </if>
+            <if test="serviceIp != null">
+                SERVICE_IP = #{serviceIp,jdbcType=VARCHAR},
+            </if>
+            <if test="serviceAccount != null">
+                SERVICE_ACCOUNT = #{serviceAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="servicePassword != null">
+                SERVICE_PASSWORD = #{servicePassword,jdbcType=VARCHAR},
+            </if>
+            <if test="createUser != null">
+                CREATE_USER = #{createUser,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUser != null">
+                LAST_MODIFY_USER = #{lastModifyUser,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyTime != null">
+                LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="virtualId != null">
+                VIRTUAL_ID = #{virtualId,jdbcType=VARCHAR},
+            </if>
+            <if test="cpuCond != null">
+                CPU_COND = #{cpuCond,jdbcType=VARCHAR},
+            </if>
+            <if test="cpuKey != null">
+                CPU_KEY = #{cpuKey,jdbcType=VARCHAR},
+            </if>
+            <if test="memoryCond != null">
+                MEMORY_COND = #{memoryCond,jdbcType=VARCHAR},
+            </if>
+            <if test="memoryKey != null">
+                MEMORY_KEY = #{memoryKey,jdbcType=VARCHAR},
+            </if>
+            <if test="diskCond != null">
+                DISK_COND = #{diskCond,jdbcType=VARCHAR},
+            </if>
+            <if test="diskKey != null">
+                DISK_KEY = #{diskKey,jdbcType=VARCHAR},
+            </if>
+            <if test="runningCond != null">
+                RUNNING_COND = #{runningCond,jdbcType=VARCHAR},
+            </if>
+            <if test="runningKey != null">
+                RUNNING_KEY = #{runningKey,jdbcType=VARCHAR},
+            </if>
+            <if test="logCond != null">
+                LOG_COND = #{logCond,jdbcType=VARCHAR},
+            </if>
+            <if test="logKey != null">
+                LOG_KEY = #{logKey,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where SERVICE_ID = #{serviceId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.cast.serviceman.api.entity.ServiceDto">
     update t_service
     set DICTIONARIES_TABLE_ID = #{dictionariesTableId,jdbcType=VARCHAR},
       GROUP_ID = #{groupId,jdbcType=VARCHAR},
