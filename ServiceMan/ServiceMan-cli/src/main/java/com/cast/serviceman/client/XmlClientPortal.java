@@ -19,5 +19,4 @@ public class XmlClientPortal {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{url});
         context.start();
     }
-
 }

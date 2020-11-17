@@ -1,6 +1,8 @@
 package com.cast.serviceman.server.mapper;
 
 import com.cast.serviceman.api.entity.ServiceDto;
+import com.cast.serviceman.api.entity.vo.ServiceDtoVo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -15,6 +17,8 @@ public interface ServiceDtoMapper {
 
     ServiceDto selectByPrimaryKey(String serviceId);
 
+    ServiceDto queryByIp(String ip);
+
     List<ServiceDto> queryVirtualByGId(String virtualId);
 
     int updateByPrimaryKeySelective(ServiceDto record);
@@ -25,6 +29,6 @@ public interface ServiceDtoMapper {
      * 查询所有的虚拟机信息
      * @return
      */
-    List<ServiceDto> queryAll();
+    List<ServiceDtoVo> queryAll(@Param("satId") String satId, @Param("serviceName") String serviceName ,  @Param("ip") String ip);
 
 }

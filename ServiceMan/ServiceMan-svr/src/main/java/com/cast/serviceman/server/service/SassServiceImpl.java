@@ -37,7 +37,7 @@ public class SassServiceImpl implements SassService {
     }
 
     @Override
-    public ResponseModel<List<SassDto>> selectBySatId(Integer satId) {
+    public ResponseModel<List<SassDto>> selectBySatId(String satId) {
         ResponseModel<List<SassDto>> responseModel = new ResponseModel<>();
         List<SassDto>  dto = sassDtoMapper.selectBySatId(satId);
         responseModel.setData(dto);
@@ -71,4 +71,5 @@ public class SassServiceImpl implements SassService {
 //        String s = list.stream().sorted(String.CASE_INSENSITIVE_ORDER).findFirst().get();
         return null;
     }
+
 }

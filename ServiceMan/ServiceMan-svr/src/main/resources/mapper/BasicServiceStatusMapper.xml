@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cast.serviceman.server.mapper.BasicServiceStatusMapper" >
+  <resultMap id="BaseResultMap" type="com.cast.serviceman.api.entity.BasicServiceStatus" >
+    <id column="BASIC_ID" property="basicId" jdbcType="VARCHAR" />
+    <result column="SOFT_NAME" property="softName" jdbcType="VARCHAR" />
+    <result column="MODEL" property="model" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="LAST_MODIFY_USER" property="lastModifyUser" jdbcType="VARCHAR" />
+    <result column="LAST_MODIFY_TIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
+    <result column="IP" property="ip" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    BASIC_ID, SOFT_NAME, MODEL, STATUS, CREATE_USER, CREATE_TIME, LAST_MODIFY_USER, LAST_MODIFY_TIME,IP
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_basic_service_status
+    where BASIC_ID = #{basicId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="queryAll" resultMap="BaseResultMap" parameterType="string">
+    select
+    <include refid="Base_Column_List" />
+    from t_basic_service_status
+    <where>
+    1=1
+    <if test="ip != null">
+    and IP = #{ip}
+    </if>
+    </where>
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_basic_service_status
+    where BASIC_ID = #{basicId,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insert" parameterType="com.cast.serviceman.api.entity.BasicServiceStatus" >
+    insert into t_basic_service_status (BASIC_ID, SOFT_NAME, MODEL, 
+      STATUS, CREATE_USER, CREATE_TIME, 
+      LAST_MODIFY_USER, LAST_MODIFY_TIME,IP)
+    values (#{basicId,jdbcType=VARCHAR}, #{softName,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, NOW(),
+      #{lastModifyUser,jdbcType=VARCHAR}, NOW(),#{ip})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cast.serviceman.api.entity.BasicServiceStatus" >
+    insert into t_basic_service_status
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="basicId != null" >
+        BASIC_ID,
+      </if>
+      <if test="softName != null" >
+        SOFT_NAME,
+      </if>
+      <if test="model != null" >
+        MODEL,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="createUser != null" >
+        CREATE_USER,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="lastModifyUser != null" >
+        LAST_MODIFY_USER,
+      </if>
+      <if test="lastModifyTime != null" >
+        LAST_MODIFY_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="basicId != null" >
+        #{basicId,jdbcType=VARCHAR},
+      </if>
+      <if test="softName != null" >
+        #{softName,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyUser != null" >
+        #{lastModifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyTime != null" >
+        #{lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cast.serviceman.api.entity.BasicServiceStatus" >
+    update t_basic_service_status
+    <set >
+      <if test="softName != null" >
+        SOFT_NAME = #{softName,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        MODEL = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyUser != null" >
+        LAST_MODIFY_USER = #{lastModifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyTime != null" >
+        LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where BASIC_ID = #{basicId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cast.serviceman.api.entity.BasicServiceStatus" >
+    update t_basic_service_status
+    set SOFT_NAME = #{softName,jdbcType=VARCHAR},
+      MODEL = #{model,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      CREATE_USER = #{createUser,jdbcType=VARCHAR},,
+      LAST_MODIFY_USER = #{lastModifyUser,jdbcType=VARCHAR},
+      LAST_MODIFY_TIME = NOW(),
+      IP = #{ip},
+    where BASIC_ID = #{basicId,jdbcType=VARCHAR}
+  </update>
+</mapper>

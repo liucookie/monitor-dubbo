@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,9 @@ public class test {
 
 
     public static void main(String[] args) throws IOException{
-        Connection connection = getConnect("47.92.225.234",22,"root","Guanli2019");
+        Connection connection = getConnect("192.168.3.200",22,"liu","Guanli2020");
+//        Connection connection = getConnect("192.168.3.200",22,"serviceman","123456");
+//        Connection connection = getConnect("47.92.225.234",22,"root","Guanli2019");
         String aa = getSession(connection,"df -h");
         System.out.println(aa);
 
@@ -31,6 +34,15 @@ public class test {
         //获取连接对象
         return conn;
     }
+    public static BufferedReader getSession1(Connection conn,String command) throws IOException {
+        Session session = conn.openSession();
+        //执行指令
+        session.execCommand(command);
+        //获取读取对象  然后即可拿到所需内容
+        InputStream in = new StreamGobbler(session.getStdout());
+        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+       return reader;
+    }
 
     public static String getSession(Connection conn,String command) throws IOException{
         Session session = conn.openSession();
@@ -45,7 +57,7 @@ public class test {
         Float total = new Float(0);
         while ((buf = reader.readLine()) != null) {
             sb.append(buf);
-            if (!buf.contains("Use%")){
+            if (!buf.contains("use%")  && !buf.contains("已用%") && !buf.contains("use%")){
                 list.add(buf.toString());
                 String[] st = buf.trim().split("\\s+");
                 String a = st[4];
@@ -64,5 +76,6 @@ public class test {
         }
         return aa;
     }
+
 
 }

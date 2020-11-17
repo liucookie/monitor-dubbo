@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cast.serviceman.server.mapper.SoftServiceStatusMapper">
+    <resultMap id="BaseResultMap" type="com.cast.serviceman.api.entity.SoftServiceStatus">
+        <id column="SOFT_ID" property="softId" jdbcType="VARCHAR"/>
+        <result column="SOFT_NAME" property="softName" jdbcType="VARCHAR"/>
+        <result column="MODEL" property="model" jdbcType="VARCHAR"/>
+        <result column="STATUS" property="status" jdbcType="VARCHAR"/>
+        <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="LAST_MODIFY_USER" property="lastModifyUser" jdbcType="VARCHAR"/>
+        <result column="LAST_MODIFY_TIME" property="lastModifyTime" jdbcType="TIMESTAMP"/>
+        <result column="IP" property="ip" jdbcType="VARCHAR"/>
+        <result column="SAT_ID" property="satId" jdbcType="VARCHAR"/>
+        <result column="SOFT_FILE_PACKAGE" property="filePackage" jdbcType="VARCHAR"/>
+        <result column="PID" property="pId" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    SOFT_ID,SOFT_NAME, MODEL, STATUS, CREATE_USER, CREATE_TIME, LAST_MODIFY_USER,
+    LAST_MODIFY_TIME,IP,SAT_ID,SOFT_FILE_PACKAGE,PID
+  </sql>
+
+    <select id="select" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from t_soft_service_status
+        where SOFT_ID = #{softId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="queryAll" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from t_soft_service_status
+        <where>
+            1 = 1
+            <if test="ip != null">
+                and IP = #{ip,jdbcType=VARCHAR}
+            </if>
+            <if test="filePackage != null">
+                and SOFT_FILE_PACKAGE = #{filePackage,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+
+    <delete id="delete" parameterType="java.lang.String">
+    delete from t_soft_service_status
+    where SOFT_ID = #{softId,jdbcType=VARCHAR}
+  </delete>
+
+
+    <insert id="insert" parameterType="com.cast.serviceman.api.entity.SoftServiceStatus">
+    insert into t_soft_service_status (SOFT_ID, SOFT_NAME,
+      MODEL, STATUS, CREATE_USER, 
+      CREATE_TIME, LAST_MODIFY_USER, LAST_MODIFY_TIME,IP,SAT_ID,SOFT_FILE_PACKAGE,PID
+      )
+    values (#{softId,jdbcType=VARCHAR}, #{softName,jdbcType=VARCHAR},
+      #{model,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, 
+     NOW(), #{lastModifyUser,jdbcType=VARCHAR}, NOW(),#{ip,jdbcType=VARCHAR},#{satId,jdbcType=VARCHAR},#{filePackage,jdbcType=VARCHAR},#{pId,jdbcType=VARCHAR}
+      )
+  </insert>
+
+    <update id="update" parameterType="com.cast.serviceman.api.entity.SoftServiceStatus">
+        update t_soft_service_status
+        <set>
+            <if test="status != null">
+                STATUS = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="softName != null">
+                SOFT_NAME = #{softName,jdbcType=VARCHAR},
+            </if>
+            <if test="model != null">
+                MODEL = #{model,jdbcType=VARCHAR},
+            </if>
+            <if test="createUser != null">
+                CREATE_USER = #{createUser,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUser != null">
+                LAST_MODIFY_USER = #{lastModifyUser,jdbcType=VARCHAR},
+            </if>
+                LAST_MODIFY_TIME = NOW(),
+            <if test="ip != null">
+                IP = #{ip},
+            </if>
+            <if test="filePackage != null">
+                SOFT_FILE_PACKAGE = #{filePackage,jdbcType=VARCHAR},
+            </if>
+            <if test="pId != null">
+                PID=#{pId,jdbcType=VARCHAR}
+            </if>
+        </set>
+        <where>
+            1 = 1
+            <if test="ip != null">
+                and IP = #{ip,jdbcType=VARCHAR}
+            </if>
+            <if test="filePackage != null">
+                and SOFT_FILE_PACKAGE = #{filePackage,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </update>
+
+
+</mapper>

@@ -21,13 +21,17 @@ public class ConnectionUtil {
      * @throws IOException
      */
     public static Connection getConnect(String ip, int port, String account, String password) throws IOException {
-        //创建连接
-        Connection conn = new Connection(ip, port);
-        //启动连接
-        conn.connect();
-        //验证账号密码
-        conn.authenticateWithPassword(account, password);
-        //获取连接对象
+        Connection conn = null;
+        try {
+            //创建连接
+            conn = new Connection(ip, port);
+            //启动连接
+            conn.connect();
+            //验证账号密码
+            conn.authenticateWithPassword(account, password);
+        }catch (Exception e){
+            return conn;
+        }
         return conn;
     }
 
@@ -45,10 +49,29 @@ public class ConnectionUtil {
         //获取读取对象  然后即可拿到所需内容
         InputStream in = new StreamGobbler(session.getStdout());
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-        reader.close();
-        if (null != session) {
-            session.close();
-        }
+//        reader.close();
+//        if (null != session) {
+//            session.close();
+//        }
         return reader;
+    }
+
+    public static String readBuffer(BufferedReader reader) throws  IOException{
+        StringBuffer sb = new StringBuffer();
+        String buf = null;
+        while ((buf = reader.readLine()) != null) {
+            sb.append(buf);
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 关闭连接
+     * @param connection
+     */
+    public static void closeConnection(Connection connection){
+        if (null != connection){
+            connection.close();
+        }
     }
 }

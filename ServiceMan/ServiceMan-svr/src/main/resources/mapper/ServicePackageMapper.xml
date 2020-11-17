@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cast.serviceman.server.mapper.ServicePackageMapper">
+  <resultMap id="BaseResultMap" type="com.cast.serviceman.api.entity.ServicePackage">
+    <id column="SERVICE_PACKAGE_ID" jdbcType="VARCHAR" property="servicePackageId" />
+    <result column="SERVICE_PACKAGE_NAME" jdbcType="VARCHAR" property="servicePackageName" />
+    <result column="SERVICE_PACKAGE_FILE" jdbcType="VARCHAR" property="servicePackageFile" />
+    <result column="SERVICE_PACKAGE_TYPE" jdbcType="VARCHAR" property="servicePackageType"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    SERVICE_PACKAGE_ID, SERVICE_PACKAGE_NAME, SERVICE_PACKAGE_FILE,SERVICE_PACKAGE_TYPE
+  </sql>
+
+
+  <select id="queryAll" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_service_package
+  </select>
+
+
+</mapper>

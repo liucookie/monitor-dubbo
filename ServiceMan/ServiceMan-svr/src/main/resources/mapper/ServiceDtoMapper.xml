@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.cast.serviceman.server.mapper.ServiceDtoMapper">
+
     <resultMap id="BaseResultMap" type="com.cast.serviceman.api.entity.ServiceDto">
         <id column="SERVICE_ID" property="serviceId" jdbcType="VARCHAR"/>
         <result column="DICTIONARIES_TABLE_ID" property="dictionariesTableId" jdbcType="VARCHAR"/>
@@ -25,17 +26,67 @@
         <result column="LOG_COND" property="logCond" jdbcType="VARCHAR"/>
         <result column="LOG_KEY" property="logKey" jdbcType="VARCHAR"/>
     </resultMap>
+
+    <resultMap id="ServiceDtoVoMap" type="com.cast.serviceman.api.entity.vo.ServiceDtoVo">
+        <id column="SERVICE_ID" property="serviceId" jdbcType="VARCHAR"/>
+        <result column="DICTIONARIES_TABLE_ID" property="dictionariesTableId" jdbcType="VARCHAR"/>
+        <result column="GROUP_ID" property="groupId" jdbcType="VARCHAR"/>
+        <result column="SERVICE_NAME" property="serviceName" jdbcType="VARCHAR"/>
+        <result column="SERVICE_IP" property="serviceIp" jdbcType="VARCHAR"/>
+        <result column="SERVICE_ACCOUNT" property="serviceAccount" jdbcType="VARCHAR"/>
+        <result column="SERVICE_PASSWORD" property="servicePassword" jdbcType="VARCHAR"/>
+        <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="LAST_MODIFY_USER" property="lastModifyUser" jdbcType="VARCHAR"/>
+        <result column="LAST_MODIFY_TIME" property="lastModifyTime" jdbcType="TIMESTAMP"/>
+        <result column="VIRTUAL_ID" property="virtualId" jdbcType="VARCHAR"/>
+        <result column="CPU_COND" property="cpuCond" jdbcType="VARCHAR"/>
+        <result column="CPU_KEY" property="cpuKey" jdbcType="VARCHAR"/>
+        <result column="MEMORY_COND" property="memoryCond" jdbcType="VARCHAR"/>
+        <result column="MEMORY_KEY" property="memoryKey" jdbcType="VARCHAR"/>
+        <result column="DISK_COND" property="diskCond" jdbcType="VARCHAR"/>
+        <result column="DISK_KEY" property="diskKey" jdbcType="VARCHAR"/>
+        <result column="RUNNING_COND" property="runningCond" jdbcType="VARCHAR"/>
+        <result column="RUNNING_KEY" property="runningKey" jdbcType="VARCHAR"/>
+        <result column="LOG_COND" property="logCond" jdbcType="VARCHAR"/>
+        <result column="LOG_KEY" property="logKey" jdbcType="VARCHAR"/>
+        <result column="GROUP_NAME" property="groupName" jdbcType="VARCHAR"/>
+        <result column="SAT_ID" property="satId" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
     <sql id="Base_Column_List">
     SERVICE_ID, DICTIONARIES_TABLE_ID, GROUP_ID, SERVICE_NAME, SERVICE_IP, SERVICE_ACCOUNT, 
     SERVICE_PASSWORD, CREATE_USER, CREATE_TIME, LAST_MODIFY_USER, LAST_MODIFY_TIME, VIRTUAL_ID, 
     CPU_COND, CPU_KEY, MEMORY_COND, MEMORY_KEY, DISK_COND, DISK_KEY, RUNNING_COND, RUNNING_KEY, 
-    LOG_COND, LOG_KEY
+    LOG_COND, LOG_KEY,SAT_ID
   </sql>
 
-    <select id="queryAll" resultMap="BaseResultMap" parameterType="java.lang.String">
+    <sql id="Service_DtoVo_Map">
+    SERVICE_ID, DICTIONARIES_TABLE_ID, t_service.GROUP_ID, SERVICE_NAME, SERVICE_IP, SERVICE_ACCOUNT,
+    SERVICE_PASSWORD,  t_service.CREATE_USER,  t_service.CREATE_TIME,  t_service.LAST_MODIFY_USER,  t_service.LAST_MODIFY_TIME, VIRTUAL_ID,
+    CPU_COND, CPU_KEY, MEMORY_COND, MEMORY_KEY, DISK_COND, DISK_KEY, RUNNING_COND, RUNNING_KEY,
+    LOG_COND, LOG_KEY,GROUP_NAME,t_service.SAT_ID
+    </sql>
+
+
+    <select id="queryAll" resultMap="ServiceDtoVoMap" parameterType="java.lang.String">
         select
-        <include refid="Base_Column_List"/>
+        <include refid="Service_DtoVo_Map"/>
         from t_service
+        left join t_group on t_service.GROUP_ID = t_group.GROUP_ID
+        <where>
+            <if test="satId != null">
+                t_service.SAT_ID = #{satId}
+            </if>
+            <if test="ip != null">
+                t_service.SERVICE_IP = #{ip}
+            </if>
+            <if test="serviceName != null">
+                t_service.SERVICE_NAME = #{serviceName}
+            </if>
+
+        </where>
     </select>
 
 
@@ -44,6 +95,13 @@
         <include refid="Base_Column_List"/>
         from t_service
         where SERVICE_ID = #{serviceId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="queryByIp" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from t_service
+        where SERVICE_IP = #{ip}
     </select>
 
     <select id="queryVirtualByGId" resultMap="BaseResultMap" parameterType="java.lang.String">
@@ -72,7 +130,7 @@
       CPU_COND, CPU_KEY, MEMORY_COND, 
       MEMORY_KEY, DISK_COND, DISK_KEY, 
       RUNNING_COND, RUNNING_KEY, LOG_COND, 
-      LOG_KEY)
+      LOG_KEY,SAT_ID)
     values (#{serviceId,jdbcType=VARCHAR}, #{dictionariesTableId,jdbcType=VARCHAR}, #{groupId,jdbcType=VARCHAR}, 
       #{serviceName,jdbcType=VARCHAR}, #{serviceIp,jdbcType=VARCHAR}, #{serviceAccount,jdbcType=VARCHAR}, 
       #{servicePassword,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, NOW(),
@@ -80,7 +138,7 @@
       #{cpuCond,jdbcType=VARCHAR}, #{cpuKey,jdbcType=VARCHAR}, #{memoryCond,jdbcType=VARCHAR}, 
       #{memoryKey,jdbcType=VARCHAR}, #{diskCond,jdbcType=VARCHAR}, #{diskKey,jdbcType=VARCHAR}, 
       #{runningCond,jdbcType=VARCHAR}, #{runningKey,jdbcType=VARCHAR}, #{logCond,jdbcType=VARCHAR}, 
-      #{logKey,jdbcType=VARCHAR})
+      #{logKey,jdbcType=VARCHAR},#{satId})
   </insert>
     <insert id="insertSelective" parameterType="com.cast.serviceman.api.entity.ServiceDto">
         insert into t_service
@@ -311,7 +369,8 @@
       RUNNING_COND = #{runningCond,jdbcType=VARCHAR},
       RUNNING_KEY = #{runningKey,jdbcType=VARCHAR},
       LOG_COND = #{logCond,jdbcType=VARCHAR},
-      LOG_KEY = #{logKey,jdbcType=VARCHAR}
+      LOG_KEY = #{logKey,jdbcType=VARCHAR},
+      SAT_ID = #{satId,jdbcType=VARCHAR}
     where SERVICE_ID = #{serviceId,jdbcType=VARCHAR}
   </update>
 </mapper>

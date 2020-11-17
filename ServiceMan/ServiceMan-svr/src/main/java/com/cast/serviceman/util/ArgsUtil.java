@@ -23,20 +23,19 @@ public class ArgsUtil {
         return map;
     }
 
-    public static void main(String[] args) throws Exception {
-        // ,"java -jar xx.jar -a23","java xxxx -h"
-        String[] ss = new String[]{ "-a","13" };
-        getCommand(ss);
-    }
+//    public static void main(String[] args) throws Exception {
+//        // ,"java -jar xx.jar -a23","java xxxx -h"
+//        String[] ss = new String[]{ "-a","13" };
+//        getCommand(ss);
+//    }
 
     public static Map<String, String> getCommand(String[] args) throws Exception {
         Map<String, String> map = new HashMap<>();
         CommandLineParser parser = new BasicParser();
         Options options = new Options();
-        options.addOption("a", "a", true, "an");
+        options.addOption("order_password", "order_password", true, "an");
 //        options.addOption("b", "b", true, "an");
         CommandLine commandLine = parser.parse(options, args);
-
         for (Option opt1 : commandLine.getOptions()) {
             String name = opt1.getLongOpt();
             String value = commandLine.getOptionValue(name);

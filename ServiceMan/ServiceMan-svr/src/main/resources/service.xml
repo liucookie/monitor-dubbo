@@ -15,8 +15,7 @@
     <dubbo:registry id="Beijing" address="zookeeper://192.168.0.150:2182" timeout="50000"/>
 
     <!-- 用dubbo协议在20880端口暴露服务，同一个机器需要区分端口，需要人工维护一个服务和端口的关系表，发布需要确认机器、端口
-     payload 消息体大小，根据实际业务情况自定
-    -->
+     payload 消息体大小，根据实际业务情况自定 -->
     <!-- 序列化建议使用 kryo 方式，需要引入 kryo jar包 serialization ="kryo"，建议版本 0.42-->
     <dubbo:protocol name="dubbo" port="20881" payload="1024000" serialization="kryo"/>
 
@@ -33,18 +32,11 @@
     <!--version：1.0.0，随着软件版本迭代更新   -->
     <!-- executes 控制服务器端并发执行（或占用线程池线程数）数量，executes= 7，如果业务量大可以酌情修改-->
 
-    
 
     <!--测试类-->
     <!--<dubbo:service interface="com.cast.serviceman.api.service.UserService" ref="user" group="serviceman1.0"-->
-                   <!--version="1.0.0" registry="Beijing"/>-->
+    <!--version="1.0.0" registry="Beijing"/>-->
     <!--<bean id="user" class="com.cast.serviceman.server.service.UserServiceImpl"/>-->
-
-
-
-
-
-
 
 
 </beans>

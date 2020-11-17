@@ -53,6 +53,18 @@ public class ServiceDto implements Serializable {
 
     private String logKey;
 
+    private String satId;
+
+
+
+    public String getSatId() {
+        return satId;
+    }
+
+    public void setSatId(String satId) {
+        this.satId = satId;
+    }
+
     public String getServiceId() {
         return serviceId;
     }

@@ -10,8 +10,6 @@ public enum ServiceManEnum {
     BASE_SERVICE_TYPE("基础服务类型", "base_service_type");
 
 
-
-
     private String name;
     private String code;
 

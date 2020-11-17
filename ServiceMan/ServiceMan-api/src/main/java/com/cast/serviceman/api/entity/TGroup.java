@@ -14,8 +14,6 @@ public class TGroup implements Serializable {
 
     private String groupName;
 
-
-
     private String createUser;
 
     private Date createTime;

@@ -3,7 +3,7 @@
 <mapper namespace="com.cast.serviceman.server.mapper.SBasicServiceDtoMapper">
     <resultMap id="BaseResultMap" type="com.cast.serviceman.api.entity.SBasicServiceDto">
         <id column="BASIC_SERVICE_ID" property="basicServiceId" jdbcType="VARCHAR"/>
-        <result column="DICTIONARIES_TABLE_ID" property="dictionariesTableId" jdbcType="VARCHAR"/>
+        <result column="DICTIONARY_CODE" property="dictionaryCode" jdbcType="VARCHAR"/>
         <result column="BASIC_SERVICE_NAME" property="basicServiceName" jdbcType="VARCHAR"/>
         <result column="SERVICE_ID" property="serviceId" jdbcType="VARCHAR"/>
         <result column="BASIC_SERVICE_ACCOUNT" property="basicServiceAccount" jdbcType="VARCHAR"/>
@@ -27,17 +27,103 @@
         <result column="LOG_KEY" property="logKey" jdbcType="VARCHAR"/>
         <result column="GROUP_ID" property="groupId" jdbcType="VARCHAR"/>
     </resultMap>
+
+
+    <resultMap id="BaseResultVoMap" type="com.cast.serviceman.api.entity.vo.SBasicServiceDtoVo">
+        <id column="BASIC_SERVICE_ID" property="basicServiceId" jdbcType="VARCHAR"/>
+        <result column="DICTIONARY_CODE" property="dictionaryCode" jdbcType="VARCHAR"/>
+        <result column="BASIC_SERVICE_NAME" property="basicServiceName" jdbcType="VARCHAR"/>
+        <result column="SERVICE_ID" property="serviceId" jdbcType="VARCHAR"/>
+        <result column="BASIC_SERVICE_ACCOUNT" property="basicServiceAccount" jdbcType="VARCHAR"/>
+        <result column="BASIC_SERVICE_PASSWORD" property="basicServicePassword" jdbcType="VARCHAR"/>
+        <result column="BASIC_SERVICE_PID" property="basicServicePid" jdbcType="VARCHAR"/>
+        <result column="BASIC_SERVICE_IP" property="basicServiceIp" jdbcType="VARCHAR"/>
+        <result column="BASIC_SERVICE_STATUS" property="basicServiceStatus" jdbcType="VARCHAR"/>
+        <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="LAST_MODIFY_USER" property="lastModifyUser" jdbcType="VARCHAR"/>
+        <result column="LAST_MODIFY_TIME" property="lastModifyTime" jdbcType="TIMESTAMP"/>
+        <result column="CPU_COND" property="cpuCond" jdbcType="VARCHAR"/>
+        <result column="CPU_KEY" property="cpuKey" jdbcType="VARCHAR"/>
+        <result column="MEMORY_COND" property="memoryCond" jdbcType="VARCHAR"/>
+        <result column="MEMORY_KEY" property="memoryKey" jdbcType="VARCHAR"/>
+        <result column="DISK_COND" property="diskCond" jdbcType="VARCHAR"/>
+        <result column="DISK_KEY" property="diskKey" jdbcType="VARCHAR"/>
+        <result column="RUNNING_COND" property="runningCond" jdbcType="VARCHAR"/>
+        <result column="RUNNING_KEY" property="runningKey" jdbcType="VARCHAR"/>
+        <result column="LOG_COND" property="logCond" jdbcType="VARCHAR"/>
+        <result column="LOG_KEY" property="logKey" jdbcType="VARCHAR"/>
+        <result column="GROUP_ID" property="groupId" jdbcType="VARCHAR"/>
+        <result column="DICTIONARY_NAME" property="dictionaryName" jdbcType="VARCHAR"/>
+        <result column="GROUP_NAME" property="groupName" jdbcType="VARCHAR"/>
+        <result column="SERVICE_NAME" property="serviceName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
     <sql id="Base_Column_List">
-    BASIC_SERVICE_ID, DICTIONARIES_TABLE_ID, BASIC_SERVICE_NAME, SERVICE_ID, 
+    BASIC_SERVICE_ID, DICTIONARY_CODE, BASIC_SERVICE_NAME, SERVICE_ID, 
     BASIC_SERVICE_ACCOUNT, BASIC_SERVICE_PASSWORD, BASIC_SERVICE_PID, BASIC_SERVICE_IP, 
     BASIC_SERVICE_STATUS, CREATE_USER, CREATE_TIME, LAST_MODIFY_USER, LAST_MODIFY_TIME,
     CPU_COND, CPU_KEY, MEMORY_COND, MEMORY_KEY, DISK_COND, DISK_KEY, RUNNING_COND, RUNNING_KEY,
     LOG_COND, LOG_KEY,GROUP_ID
   </sql>
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+
+
+    <sql id="Base_Column_Vo_List">
+    BASIC_SERVICE_ID,
+    t_basic_service.DICTIONARY_CODE,
+    BASIC_SERVICE_NAME,
+    t_basic_service.SERVICE_ID,
+    BASIC_SERVICE_ACCOUNT,
+    BASIC_SERVICE_PASSWORD,
+    BASIC_SERVICE_PID,
+    BASIC_SERVICE_IP,
+    BASIC_SERVICE_STATUS,
+    t_basic_service.CREATE_USER,
+    t_basic_service.CREATE_TIME,
+    t_basic_service.LAST_MODIFY_USER,
+    t_basic_service.LAST_MODIFY_TIME,
+    t_basic_service.CPU_COND,
+    t_basic_service.CPU_KEY,
+    t_basic_service.MEMORY_COND,
+    t_basic_service.MEMORY_KEY,
+    t_basic_service.DISK_COND,
+    t_basic_service.DISK_KEY,
+    t_basic_service.RUNNING_COND,
+    t_basic_service.RUNNING_KEY,
+    t_basic_service.LOG_COND,
+    t_basic_service.LOG_KEY,
+    t_basic_service.GROUP_ID,
+    DICTIONARY_NAME,
+    GROUP_NAME,SERVICE_NAME
+  </sql>
+
+
+    <select id="queryAll" resultMap="BaseResultVoMap" parameterType="java.lang.String">
         select
-        <include refid="Base_Column_List"/>
+        <include refid="Base_Column_Vo_List"/>
         from t_basic_service
+        left join t_dictionary
+        on t_basic_service.DICTIONARY_CODE = t_dictionary.DICTIONARY_CODE and t_dictionary.DICTIONARY_TYPE_CODE =
+        'base_service_type'
+        left join t_group
+        on t_basic_service.GROUP_ID = t_group.GROUP_ID
+        left join t_service
+        on t_basic_service.SERVICE_ID = t_service.SERVICE_ID
+    </select>
+
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultVoMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_Vo_List"/>
+        from t_basic_service
+        left join t_dictionary
+        on t_basic_service.DICTIONARY_CODE = t_dictionary.DICTIONARY_CODE and t_dictionary.DICTIONARY_TYPE_CODE =
+        'base_service_type'
+        left join t_group
+        on t_basic_service.GROUP_ID = t_group.GROUP_ID
+        left join t_service
+        on t_basic_service.SERVICE_ID = t_service.SERVICE_ID
         where BASIC_SERVICE_ID = #{basicServiceId,jdbcType=VARCHAR}
     </select>
 
@@ -55,7 +141,7 @@
   </delete>
 
     <insert id="insert" parameterType="com.cast.serviceman.api.entity.SBasicServiceDto">
-    insert into t_basic_service (BASIC_SERVICE_ID, DICTIONARIES_TABLE_ID, 
+    insert into t_basic_service (BASIC_SERVICE_ID, DICTIONARY_CODE, 
       BASIC_SERVICE_NAME, SERVICE_ID, BASIC_SERVICE_ACCOUNT, 
       BASIC_SERVICE_PASSWORD, BASIC_SERVICE_PID, 
       BASIC_SERVICE_IP, BASIC_SERVICE_STATUS, CREATE_USER, 
@@ -63,7 +149,7 @@
       CPU_COND, CPU_KEY, MEMORY_COND, MEMORY_KEY, DISK_COND, DISK_KEY, RUNNING_COND, RUNNING_KEY,
       LOG_COND, LOG_KEY,GROUP_ID
       )
-    values (#{basicServiceId,jdbcType=VARCHAR}, #{dictionariesTableId,jdbcType=VARCHAR}, 
+    values (#{basicServiceId,jdbcType=VARCHAR}, #{dictionaryCode,jdbcType=VARCHAR}, 
       #{basicServiceName,jdbcType=VARCHAR}, #{serviceId,jdbcType=VARCHAR}, #{basicServiceAccount,jdbcType=VARCHAR}, 
       #{basicServicePassword,jdbcType=VARCHAR}, #{basicServicePid,jdbcType=VARCHAR}, 
       #{basicServiceIp,jdbcType=VARCHAR}, #{basicServiceStatus,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, 
@@ -80,8 +166,8 @@
             <if test="basicServiceId != null">
                 BASIC_SERVICE_ID,
             </if>
-            <if test="dictionariesTableId != null">
-                DICTIONARIES_TABLE_ID,
+            <if test="dictionaryCode != null">
+                DICTIONARY_CODE,
             </if>
             <if test="basicServiceName != null">
                 BASIC_SERVICE_NAME,
@@ -121,8 +207,8 @@
             <if test="basicServiceId != null">
                 #{basicServiceId,jdbcType=VARCHAR},
             </if>
-            <if test="dictionariesTableId != null">
-                #{dictionariesTableId,jdbcType=VARCHAR},
+            <if test="dictionaryCode != null">
+                #{dictionaryCode,jdbcType=VARCHAR},
             </if>
             <if test="basicServiceName != null">
                 #{basicServiceName,jdbcType=VARCHAR},
@@ -162,8 +248,8 @@
     <update id="updateByPrimaryKeySelective" parameterType="com.cast.serviceman.api.entity.SBasicServiceDto">
         update t_basic_service
         <set>
-            <if test="dictionariesTableId != null">
-                DICTIONARIES_TABLE_ID = #{dictionariesTableId,jdbcType=VARCHAR},
+            <if test="dictionaryCode != null">
+                DICTIONARY_CODE = #{dictionaryCode,jdbcType=VARCHAR},
             </if>
             <if test="basicServiceName != null">
                 BASIC_SERVICE_NAME = #{basicServiceName,jdbcType=VARCHAR},
@@ -203,7 +289,7 @@
     </update>
     <update id="updateByPrimaryKey" parameterType="com.cast.serviceman.api.entity.SBasicServiceDto">
     update t_basic_service
-    set DICTIONARIES_TABLE_ID = #{dictionariesTableId,jdbcType=VARCHAR},
+    set DICTIONARY_CODE = #{dictionaryCode,jdbcType=VARCHAR},
       BASIC_SERVICE_NAME = #{basicServiceName,jdbcType=VARCHAR},
       SERVICE_ID = #{serviceId,jdbcType=VARCHAR},
       BASIC_SERVICE_ACCOUNT = #{basicServiceAccount,jdbcType=VARCHAR},

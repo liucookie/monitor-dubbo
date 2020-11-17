@@ -14,8 +14,6 @@ public interface SatInfoService {
 
     ResponseModel<List<SatInfo>> queryAll();
 
-    //根据软件id查询
-    ResponseModel<SatInfo> queryById(Integer id);
 
 
 }

@@ -2,6 +2,7 @@ package com.cast.serviceman.api.service;
 
 import com.cast.serviceman.api.entity.ServiceDto;
 import com.cast.serviceman.api.entity.common.ResponseModel;
+import com.cast.serviceman.api.entity.vo.ServiceDtoVo;
 
 import java.util.List;
 
@@ -15,13 +16,17 @@ public interface ComputerServerService {
 
     ResponseModel<Integer>  update(ServiceDto dto);
 
-    ServiceDto queryById(String id);
+    ResponseModel<ServiceDto> queryById(String id);
+
+    ServiceDto queryByIp(String ip);
 
     /**
      * 查询所有的服务器信息
      * @return
      */
-    ResponseModel<List<ServiceDto>> queryAll();
+    ResponseModel<List<ServiceDtoVo>> queryAll();
+
+    ResponseModel<Integer>  delete(String id);
 
 
 }

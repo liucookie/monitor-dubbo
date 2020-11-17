@@ -14,7 +14,7 @@ public interface SassDtoMapper {
 
     SassDto selectByPrimaryKey(String saasId);
 
-    List<SassDto> selectBySatId(Integer satId);
+    List<SassDto> selectBySatId(String satId);
 
     int updateByPrimaryKeySelective(SassDto record);
 

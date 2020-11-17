@@ -12,7 +12,7 @@ public class SBasicServiceDto implements Serializable {
     private static final long serialVersionUID = 3890784629354748538L;
     private String basicServiceId;
 
-    private String dictionariesTableId;
+    private String dictionaryCode;
 
     private String basicServiceName;
 
@@ -158,13 +158,6 @@ public class SBasicServiceDto implements Serializable {
         this.basicServiceId = basicServiceId == null ? null : basicServiceId.trim();
     }
 
-    public String getDictionariesTableId() {
-        return dictionariesTableId;
-    }
-
-    public void setDictionariesTableId(String dictionariesTableId) {
-        this.dictionariesTableId = dictionariesTableId == null ? null : dictionariesTableId.trim();
-    }
 
     public String getBasicServiceName() {
         return basicServiceName;
@@ -252,5 +245,44 @@ public class SBasicServiceDto implements Serializable {
 
     public void setLastModifyTime(Date lastModifyTime) {
         this.lastModifyTime = lastModifyTime;
+    }
+
+    public String getDictionaryCode() {
+        return dictionaryCode;
+    }
+
+    public void setDictionaryCode(String dictionaryCode) {
+        this.dictionaryCode = dictionaryCode;
+    }
+
+
+    @Override
+    public String toString() {
+        return "SBasicServiceDto{" +
+                "basicServiceId='" + basicServiceId + '\'' +
+                ", dictionaryCode='" + dictionaryCode + '\'' +
+                ", basicServiceName='" + basicServiceName + '\'' +
+                ", serviceId='" + serviceId + '\'' +
+                ", basicServiceAccount='" + basicServiceAccount + '\'' +
+                ", basicServicePassword='" + basicServicePassword + '\'' +
+                ", basicServicePid='" + basicServicePid + '\'' +
+                ", basicServiceIp='" + basicServiceIp + '\'' +
+                ", basicServiceStatus='" + basicServiceStatus + '\'' +
+                ", createUser='" + createUser + '\'' +
+                ", createTime=" + createTime +
+                ", lastModifyUser='" + lastModifyUser + '\'' +
+                ", lastModifyTime=" + lastModifyTime +
+                ", cpuCond='" + cpuCond + '\'' +
+                ", cpuKey='" + cpuKey + '\'' +
+                ", memoryCond='" + memoryCond + '\'' +
+                ", memoryKey='" + memoryKey + '\'' +
+                ", diskCond='" + diskCond + '\'' +
+                ", diskKey='" + diskKey + '\'' +
+                ", runningCond='" + runningCond + '\'' +
+                ", runningKey='" + runningKey + '\'' +
+                ", logCond='" + logCond + '\'' +
+                ", logKey='" + logKey + '\'' +
+                ", groupId='" + groupId + '\'' +
+                '}';
     }
 }

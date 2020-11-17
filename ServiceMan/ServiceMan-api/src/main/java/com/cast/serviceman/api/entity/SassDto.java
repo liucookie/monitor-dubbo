@@ -39,7 +39,6 @@ public class SassDto  implements Serializable {
     private String satId;
 
 
-
     public String getSatId() {
         return satId;
     }

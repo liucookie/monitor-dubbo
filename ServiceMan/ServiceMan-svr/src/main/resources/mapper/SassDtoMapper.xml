@@ -30,11 +30,16 @@
   </select>
 
 
-  <select id="selectBySatId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectBySatId" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select
     <include refid="Base_Column_List" />
     from t_saas
-    where SAT_ID = #{satId}
+    <where>
+    <if test="satId != null">
+      SAT_ID = #{satId}
+    </if>
+    </where>
+
   </select>
 
 

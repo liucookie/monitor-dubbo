@@ -5,15 +5,14 @@ import java.util.Date;
 
 /**
  * 字典表,用于元数据查询
+ *
  * @author zhaogeng
  */
 public class Dictionary implements Serializable {
 
     private static final long serialVersionUID = 3884946938008520196L;
 
-    
     private String dictionaryCode;
-
 
     private String dictionaryName;
 
@@ -52,7 +51,6 @@ public class Dictionary implements Serializable {
     public void setDictionaryCode(String dictionaryCode) {
         this.dictionaryCode = dictionaryCode == null ? null : dictionaryCode.trim();
     }
-
 
     public String getDictionaryName() {
         return dictionaryName;

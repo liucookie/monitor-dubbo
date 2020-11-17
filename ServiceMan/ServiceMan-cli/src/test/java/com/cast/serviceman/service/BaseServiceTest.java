@@ -1,10 +1,7 @@
 package com.cast.serviceman.service;
 
-import com.cast.serviceman.api.entity.SBasicServiceDto;
 import com.cast.serviceman.api.entity.ServiceDto;
-import com.cast.serviceman.api.service.BasicService;
 import com.cast.serviceman.api.service.ComputerServerService;
-import com.cast.serviceman.api.service.SassService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

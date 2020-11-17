@@ -38,6 +38,7 @@ public class VirtualServiceImpl implements VirtualService {
         return responseModel;
     }
 
+
     /**
      * 删除虚拟机,以及服务器
      * @param id 虚拟机id
@@ -50,6 +51,8 @@ public class VirtualServiceImpl implements VirtualService {
         serviceDtoMapper.deleteByVirtualId(id);
         //删除虚拟机
         virtualMachineMapper.deleteByPrimaryKey(id);
+
+
     }
 
     @Override
@@ -58,6 +61,7 @@ public class VirtualServiceImpl implements VirtualService {
         po.setVirtualId(CommonUtils.generateUUID());
         virtualMachineMapper.insert(po);
     }
+
 
     @Override
     @Transactional
